@@ -1,7 +1,6 @@
 import Registration from "./assets/pages/registration";
 
 function App() {
-
   return (
     <div>
       <div className="text-center mt-10">
@@ -12,7 +11,7 @@ function App() {
       </div>
       <Registration />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
