@@ -1,17 +1,17 @@
-import Registration from "./assets/pages/registration";
+import { useState } from 'react'
+import NavBar from './assets/Complonants/NavBar/NavBar';
+import Registration from './assets/Pages/Registration';
+import Home from './assets/Pages/Home';
 
 function App() {
+
   return (
-    <div>
-      <div className="text-center mt-10">
-        <h1 className="text-4xl text-blue-600 font-bold">Tailwind Working!</h1>
-        <button className="px-6 py-2 mt-4 bg-green-500 text-white rounded-lg">
-          Test Button
-        </button>
-      </div>
+    <div className='bg-black'>
+      <NavBar />
       <Registration />
+      <Home/>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
