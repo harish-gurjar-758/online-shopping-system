@@ -5,9 +5,9 @@ const userSchema = new mongoose.Schema(
     {
         userType: {
             type: String,
-            enum: ["customer", "Seller"],
+            enum: ["Customer", "Seller"],
             required: true,
-            default: "customer",
+            default: "Customer",
         },
         userName: {
             type: String,
@@ -40,5 +40,5 @@ const userSchema = new mongoose.Schema(
 );
 
 // Create and export model
-const User = mongoose.model("User", userSchema);
+const User = mongoose.model("Users", userSchema);
 export default User;

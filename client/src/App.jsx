@@ -1,17 +1,20 @@
-import { useState } from 'react'
-import NavBar from './assets/Complonants/NavBar/NavBar';
-import Registration from './assets/Pages/Registration';
-import Home from './assets/Pages/Home';
+import { Routes, Route } from "react-router-dom";
+import NavBar from "./assets/Complonants/NavBar/NavBar";
+import Registration from "./assets/Pages/Registration";
+import Home from "./assets/Pages/Home";
 
 function App() {
-
   return (
-    <div className='bg-black'>
+    <div className="bg-white min-h-screen">
       <NavBar />
-      <Registration />
-      <Home/>
+
+      {/* All Routes */}
+      <Routes>
+        <Route path="/home" element={<Home />} />
+        <Route path="/register" element={<Registration />} />
+      </Routes>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
