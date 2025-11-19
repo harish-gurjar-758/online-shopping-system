@@ -1,12 +1,12 @@
-import React from 'react'
-import {lendingPageHeroBg} from '././AssetsMedia/LendingPageHeroBg.jp'
+import React from "react";
+import LendingPageHeroBg from "../AssetsMedia/lendingPageHeroBg.jpg";
 
 export default function LandingPage() {
   return (
     <div>
-        <div>
-            <img src={lendingPageHeroBg} alt="" />
-        </div>
+      <div>
+        <img src={LendingPageHeroBg} alt="Landing Page Hero" />
+      </div>
     </div>
-  )
+  );
 }
