@@ -22,7 +22,7 @@ connectDB();
 
 // API Routes
 app.use('/api', authRoutes);
-
+ 
 // Server Listen
 app.listen(PORT, () => {
     console.log(`Server running at : http://localhost:${PORT}`);
