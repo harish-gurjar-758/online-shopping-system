@@ -7,6 +7,9 @@ export default function LandingPage() {
       <div>
         <img src={LendingPageHeroBg} alt="Landing Page Hero" />
       </div>
+      <div>
+        
+      </div>
     </div>
   );
 }
