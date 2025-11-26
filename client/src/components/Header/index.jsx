@@ -1,5 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import logo from '../../../public/logo.png'
+import Search from '../Search'
 
 export default function Header() {
     return (
@@ -39,13 +41,15 @@ export default function Header() {
             {/* --start-- */}
             <div className="header">
                 <div className="container flex items-center justify-between">
-                    <div className="col1">
+                    <div className="col1 w-[25%]">
                         <Link to={'/'}>
-                            <img src="" alt="" />
+                            <img src={logo} alt="./logo.png" />
                         </Link>
                     </div>
-                    <div className="col2"></div>
-                    <div className="col3"></div>
+                    <div className="col2 w-[45%]">
+                        <Search/>
+                    </div>
+                    <div className="col3 w-[30%]"></div>
                 </div>
             </div>
             {/* --end-- */}
