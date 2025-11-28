@@ -1,7 +1,24 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import logo from '../../../public/logo.png'
-import Search from '../Search'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import Search from '../Search';
+import Badge from '@mui/material/Badge';
+import { styled } from '@mui/material/styles';
+import IconButton from '@mui/material/IconButton';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import CompareArrowsIcon from '@mui/icons-material/CompareArrows';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import Tooltip from '@mui/material/Tooltip';
+
+// --- Start
+const StyledBadge = styled(Badge)(({ theme }) => ({
+    '& .MuiBadge-badge': {
+        right: -3,
+        top: 13,
+        border: `2px solid ${(theme.vars ?? theme).palette.background.paper}`,
+        padding: '0 4px',
+    },
+}));
+// --- End
 
 export default function Header() {
     return (
@@ -40,16 +57,50 @@ export default function Header() {
 
             {/* --start-- */}
             <div className="header">
-                <div className="container flex items-center justify-between">
+                <div className="container flex items-center justify-between gap-10">
                     <div className="col1 w-[25%]">
                         <Link to={'/'}>
-                            <img src={logo} alt="./logo.png" />
+                            <img src="/logo.png" alt="logo" />
                         </Link>
                     </div>
                     <div className="col2 w-[45%]">
-                        <Search/>
+                        <Search />
                     </div>
-                    <div className="col3 w-[30%]"></div>
+                    <div className="col3 w-[30%] flex items-center justify-end">
+                        <ul className="flex items-center gap-3">
+                            <li className="list-none">
+                                <Link className="link transition text-[15px] font-[500]">Login</Link> &nbsp;| &nbsp;
+                                <Link className="link transition text-[15px] font-[500]">Register</Link>
+                            </li>
+                            <li>
+                                <Tooltip title="Compare">
+                                    <IconButton aria-label="compare">
+                                        <StyledBadge badgeContent={4} color="secondary" >
+                                            <CompareArrowsIcon />
+                                        </StyledBadge>
+                                    </IconButton>
+                                </Tooltip>
+                            </li>
+                            <li>
+                                <Tooltip title="Wish List">
+                                    <IconButton aria-label="wishList">
+                                        <StyledBadge badgeContent={4} color="secondary">
+                                            <FavoriteBorderIcon />
+                                        </StyledBadge>
+                                    </IconButton>
+                                </Tooltip>
+                            </li>
+                            <li>
+                                <Tooltip title="Cart">
+                                    <IconButton aria-label="cart">
+                                        <StyledBadge badgeContent={4} color="secondary">
+                                            <ShoppingCartIcon />
+                                        </StyledBadge>
+                                    </IconButton>
+                                </Tooltip>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
             {/* --end-- */}

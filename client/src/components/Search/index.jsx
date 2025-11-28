@@ -12,8 +12,8 @@ export default function Search() {
                 placeholder='Search for  products...' />
 
             <Button
-                className='!absolute top-[5px] right-[5px] z-50 w-[35px] min-w[35px] h-[35px]'
-            ><SearchIcon /></Button>
+                className='!absolute top-[8px] right-[5px] z-50 !w-[37px] !min-w-[37px] h-[37px] !rounded-full !text-black'
+            ><SearchIcon className='text-[#2c2c2c] text-[22px]' /></Button>
         </div>
     )
 }
