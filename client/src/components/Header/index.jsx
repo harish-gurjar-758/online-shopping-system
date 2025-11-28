@@ -8,6 +8,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import CompareArrowsIcon from '@mui/icons-material/CompareArrows';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import Tooltip from '@mui/material/Tooltip';
+import Navigation from './Navigation';
 
 // --- Start
 const StyledBadge = styled(Badge)(({ theme }) => ({
@@ -22,7 +23,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 
 export default function Header() {
     return (
-        <header>
+        <header className='bg-white'>
             {/* --start-- */}
             <div className="top-strip py-2 border-t-[1px] border-b-[1px] border-gray-250">
                 <div className="container">
@@ -56,7 +57,7 @@ export default function Header() {
             {/* --end-- */}
 
             {/* --start-- */}
-            <div className="header">
+            <div className="header py-4 border-t-[1px] border-b-[1px] border-gray-250">
                 <div className="container flex items-center justify-between gap-10">
                     <div className="col1 w-[25%]">
                         <Link to={'/'}>
@@ -103,6 +104,10 @@ export default function Header() {
                     </div>
                 </div>
             </div>
+            {/* --end-- */}
+
+            {/* --start-- */}
+            <Navigation />
             {/* --end-- */}
         </header>
     )
