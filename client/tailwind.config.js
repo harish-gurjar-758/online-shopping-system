@@ -10,7 +10,8 @@ export default {
         primary: '#ff5252'
       },
       backgroundColor: {
-        primary: '#ff5252'
+        primary: '#ff5252',
+        secoundry: '#f5f0f0'
       },
     },
   },
