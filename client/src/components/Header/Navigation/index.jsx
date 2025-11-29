@@ -16,9 +16,21 @@ export default function Navigation() {
           </Button>
         </div>
         <div className="col_2 w-[80%]">
-          <ul className="flex items-center">
+          <ul className="flex items-center gap-5">
             <li className='list-none'>
               <Link className='link transition'>Home</Link>
+            </li>
+            <li className='list-none'>
+              <Link className='link transition'>Fashion</Link>
+            </li>
+            <li className='list-none'>
+              <Link className='link transition'>New Arrivals</Link>
+            </li>
+            <li className='list-none'>
+              <Link className='link transition'>All Brands</Link>
+            </li>
+            <li className='list-none'>
+              <Link className='link transition'>More</Link>
             </li>
           </ul>
         </div>
