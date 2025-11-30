@@ -15,7 +15,7 @@ body {
 }
 
 .container {
-    width: 90%;
+    width: 95%;
     margin: auto;
 }
 
@@ -28,8 +28,12 @@ body {
     background: #ff5252;
 }
 
+.link{
+    color: black !important;
+}
+
 .link:hover {
-    color: #ff5252;
+    color: #ff5252 !important;
 }
 
 .MuiBadge-badge{
