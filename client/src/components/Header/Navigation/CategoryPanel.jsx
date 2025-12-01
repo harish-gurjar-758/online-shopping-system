@@ -33,7 +33,7 @@ export default function CategoryPanel(props) {
     };
 
     const DrawerList = (
-        <Box sx={{ width: 280 }} role="presentation">
+        <Box sx={{ width: 280 }} role="presentation" className='categoryPanel'>
             <div className="flex items-center justify-between p-3">
                 <h3 className="text-[16px] font-[500]">Shop By Category</h3>
                 <CloseIcon className="cursor-pointer" onClick={toggleDrawer(false)} />
@@ -69,7 +69,7 @@ export default function CategoryPanel(props) {
                         )}
 
                         {openMain.fashion && (
-                            <ul className="submenu absolute top-[100%] left-0 w-full pl-3 bg-white">
+                            <ul className="submenu absolute top-[100%] left-0 w-full pl-3">
 
                                 {/* ---------- Apparel ---------- */}
                                 <li className="list-none flex items-center justify-between relative">
