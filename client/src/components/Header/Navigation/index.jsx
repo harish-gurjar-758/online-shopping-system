@@ -30,7 +30,9 @@ export default function Navigation() {
           <div className="col_2 w-[62%]">
             <ul className="flex items-center justify-evenly gap-1">
               <li className='list-none'>
-                <Link className='link transition text-[15px] '>
+                <Link
+                to='/' 
+                 className='link transition text-[15px] '>
                   <Button className='link transition font-[500]'>Home</Button>
                 </Link>
               </li>
