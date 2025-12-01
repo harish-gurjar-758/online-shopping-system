@@ -41,136 +41,152 @@ export default function CategoryPanel(props) {
 
             <Divider />
 
-            <ul className="p-2">
+            <div className="scroll">
+                <ul className="w-full">
 
-                {/* -------------------- FASHION -------------------- */}
-                <li className="relative">
-                    <Button
-                        disableRipple
-                        className="w-full !text-left px-3"
-                        onClick={() => toggleMain("fashion")}
-                    >
-                        Fashion
-                    </Button>
+                    {/* -------------------- FASHION -------------------- */}
+                    <li className="list-none w-full flex items-center justify-between relative">
+                        <Link to='' className="link w-full">
+                            <Button
+                                disableRipple
+                                className="w-full !text-left !justify-start !px-3 link"
+                            // onClick={() => toggleMain("fashion")}
+                            >
+                                Fashion
+                            </Button>
+                        </Link>
 
-                    {openMain.fashion ? (
-                        <RiSubtractLine
-                            className="absolute right-3 top-3 cursor-pointer"
-                            onClick={() => toggleMain("fashion")}
-                        />
-                    ) : (
-                        <FiPlusSquare
-                            className="absolute right-3 top-3 cursor-pointer"
-                            onClick={() => toggleMain("fashion")}
-                        />
-                    )}
+                        {openMain.fashion ? (
+                            <RiSubtractLine
+                                className="absolute right-3 top-3 cursor-pointer"
+                                onClick={() => toggleMain("fashion")}
+                            />
+                        ) : (
+                            <FiPlusSquare
+                                className="absolute right-3 top-3 cursor-pointer"
+                                onClick={() => toggleMain("fashion")}
+                            />
+                        )}
 
-                    {openMain.fashion && (
-                        <ul className="ml-3 bg-white">
+                        {openMain.fashion && (
+                            <ul className="submenu absolute top-[100%] left-0 w-full pl-3 bg-white">
 
-                            {/* ---------- Apparel ---------- */}
-                            <li className="relative">
-                                <Button
-                                    disableRipple
-                                    className="w-full !text-left px-3"
-                                    onClick={() => toggleSub("apparel")}
-                                >
-                                    Apparel
-                                </Button>
+                                {/* ---------- Apparel ---------- */}
+                                <li className="list-none flex items-center justify-between relative">
+                                    <Link to='' className="link w-full">
+                                        <Button
+                                            disableRipple
+                                            className="w-full !text-left !justify-start !px-3 link"
+                                            onClick={() => toggleSub("apparel")}
+                                        >
+                                            Apparel
+                                        </Button>
+                                    </Link>
 
-                                {openSub.apparel ? (
-                                    <RiSubtractLine
-                                        className="absolute right-3 top-3 cursor-pointer"
-                                        onClick={() => toggleSub("apparel")}
-                                    />
-                                ) : (
-                                    <FiPlusSquare
-                                        className="absolute right-3 top-3 cursor-pointer"
-                                        onClick={() => toggleSub("apparel")}
-                                    />
-                                )}
+                                    {openSub.apparel ? (
+                                        <RiSubtractLine
+                                            className="absolute right-3 top-3 cursor-pointer"
+                                            onClick={() => toggleSub("apparel")}
+                                        />
+                                    ) : (
+                                        <FiPlusSquare
+                                            className="absolute right-3 top-3 cursor-pointer"
+                                            onClick={() => toggleSub("apparel")}
+                                        />
+                                    )}
 
-                                {openSub.apparel && (
-                                    <ul className="ml-3 bg-white">
-                                        <li><Link to="/dsfd" className="block py-2 px-3">Smart Tablet</Link></li>
-                                        <li><Link to="/dsfd" className="block py-2 px-3">Crepe T-Shirt</Link></li>
-                                        <li><Link to="/dsfd" className="block py-2 px-3">Leather Watch</Link></li>
-                                        <li><Link to="/dsfd" className="block py-2 px-3">Rolling Diamond</Link></li>
-                                    </ul>
-                                )}
-                            </li>
+                                    {openSub.apparel && (
+                                        <ul className="ml-3 bg-white">
+                                            <li><Link to="/dsfd" className="block py-2 px-3">Smart Tablet</Link></li>
+                                            <li><Link to="/dsfd" className="block py-2 px-3">Crepe T-Shirt</Link></li>
+                                            <li><Link to="/dsfd" className="block py-2 px-3">Leather Watch</Link></li>
+                                            <li><Link to="/dsfd" className="block py-2 px-3">Rolling Diamond</Link></li>
+                                        </ul>
+                                    )}
+                                </li>
 
-                            {/* ---------- Outerwear ---------- */}
-                            <li className="relative">
-                                <Button
-                                    disableRipple
-                                    className="w-full !text-left px-3"
-                                    onClick={() => toggleSub("outerwear")}
-                                >
-                                    Outerwear
-                                </Button>
-
-                                {openSub.outerwear ? (
-                                    <RiSubtractLine
-                                        className="absolute right-3 top-3 cursor-pointer"
+                                {/* ---------- Outerwear ---------- */}
+                                <li className="relative">
+                                    <Button
+                                        disableRipple
+                                        className="w-full !text-left !justify-start !px-3 link"
                                         onClick={() => toggleSub("outerwear")}
-                                    />
-                                ) : (
-                                    <FiPlusSquare
-                                        className="absolute right-3 top-3 cursor-pointer"
-                                        onClick={() => toggleSub("outerwear")}
-                                    />
-                                )}
+                                    >
+                                        Outerwear
+                                    </Button>
 
-                                {openSub.outerwear && (
-                                    <ul className="ml-3 bg-white">
-                                        <li><Link to="/dsfd" className="block py-2 px-3">Jackets</Link></li>
-                                        <li><Link to="/dsfd" className="block py-2 px-3">Hoodies</Link></li>
-                                        <li><Link to="/dsfd" className="block py-2 px-3">Coats</Link></li>
-                                    </ul>
-                                )}
-                            </li>
+                                    {openSub.outerwear ? (
+                                        <RiSubtractLine
+                                            className="absolute right-3 top-3 cursor-pointer"
+                                            onClick={() => toggleSub("outerwear")}
+                                        />
+                                    ) : (
+                                        <FiPlusSquare
+                                            className="absolute right-3 top-3 cursor-pointer"
+                                            onClick={() => toggleSub("outerwear")}
+                                        />
+                                    )}
 
-                            {/* ---------- Footwear ---------- */}
-                            <li className="relative">
-                                <Button
-                                    disableRipple
-                                    className="w-full !text-left px-3"
-                                    onClick={() => toggleSub("footwear")}
-                                >
-                                    Footwear
-                                </Button>
+                                    {openSub.outerwear && (
+                                        <ul className="ml-3 bg-white">
+                                            <li><Link to="/dsfd" className="block py-2 px-3">Jackets</Link></li>
+                                            <li><Link to="/dsfd" className="block py-2 px-3">Hoodies</Link></li>
+                                            <li><Link to="/dsfd" className="block py-2 px-3">Coats</Link></li>
+                                        </ul>
+                                    )}
+                                </li>
 
-                                {openSub.footwear ? (
-                                    <RiSubtractLine
-                                        className="absolute right-3 top-3 cursor-pointer"
+                                {/* ---------- Footwear ---------- */}
+                                <li className="relative">
+                                    <Button
+                                        disableRipple
+                                        className="w-full !text-left !justify-start !px-3 link"
                                         onClick={() => toggleSub("footwear")}
-                                    />
-                                ) : (
-                                    <FiPlusSquare
-                                        className="absolute right-3 top-3 cursor-pointer"
-                                        onClick={() => toggleSub("footwear")}
-                                    />
-                                )}
+                                    >
+                                        Footwear
+                                    </Button>
 
-                                {openSub.footwear && (
-                                    <ul className="ml-3 bg-white">
-                                        <li><Link to="/dsfd" className="block py-2 px-3">Sneakers</Link></li>
-                                        <li><Link to="/dsfd" className="block py-2 px-3">Boots</Link></li>
-                                        <li><Link to="/dsfd" className="block py-2 px-3">Sandals</Link></li>
-                                    </ul>
-                                )}
-                            </li>
+                                    {openSub.footwear ? (
+                                        <RiSubtractLine
+                                            className="absolute right-3 top-3 cursor-pointer"
+                                            onClick={() => toggleSub("footwear")}
+                                        />
+                                    ) : (
+                                        <FiPlusSquare
+                                            className="absolute right-3 top-3 cursor-pointer"
+                                            onClick={() => toggleSub("footwear")}
+                                        />
+                                    )}
 
-                        </ul>
-                    )}
-                </li>
+                                    {openSub.footwear && (
+                                        <ul className="ml-3 bg-white">
+                                            <li><Link to="/dsfd" className="w-full link block py-2 px-3">Sneakers</Link></li>
+                                            <li><Link to="/dsfd" className="w-full block py-2 px-3 link">Sandals</Link></li>
+                                            <li><Link to="/dsfd" className="w-full block py-2 px-3 link">Boots</Link></li>
+                                        </ul>
+                                    )}
+                                </li>
 
-                {/* -------------------- Simple Categories -------------------- */}
-                <li><Button className="w-full !text-left px-3">Jewellery</Button></li>
-                <li><Button className="w-full !text-left px-3">Watches</Button></li>
+                            </ul>
+                        )}
+                    </li>
 
-            </ul>
+                    {/* -------------------- Simple Categories -------------------- */}
+                    <li className="list-none flex items-center justify-between">
+                        <Link to='/jewellery' className="link w-full">
+                            <Button
+                                className="w-full !text-left !justify-start !px-3 link"
+                            >Jewellery</Button>
+                        </Link>
+                    </li>
+                    <li className="list-none flex items-center justify-between relative">
+                        <Link to='' className="link w-full">
+                            <Button className="w-full !text-left !justify-start !px-3 link">Watches</Button>
+                        </Link>
+                    </li>
+
+                </ul>
+            </div>
         </Box>
     );
 
