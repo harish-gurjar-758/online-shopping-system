@@ -9,19 +9,19 @@ import Button from "@mui/material/Button";
 export default function HeroCarousel() {
     const banners = [
         {
-            img: "https://tse3.mm.bing.net/th/id/OIP.ILezmwgMVMBXx2myRa-JuQHaEo?rs=1&pid=ImgDetMain&o=7&rm=3",
+            img: "https://img.freepik.com/free-photo/cheerful-lady-standing-with-shopping-bags-smiling-looking-happy-pink-background_1258-301568.jpg",
             title: "UP TO 70% OFF",
             desc: "Fashion finds for the super stylish",
             button: "SHOP NOW"
         },
         {
-            img: "https://img.freepik.com/premium-photo/bird-flower-desktop-wallpaperfloral-digital-paperdesktop-background_1023618-6229.jpg",
+            img: "https://img.freepik.com/free-photo/covid-quarantine-lifestyle-concept-amazed-redhead-man-looking-shopping-bags-after-buying-with_1258-161486.jpg",
             title: "Best deals of the season",
             desc: "Everything you love at low prices",
             button: "Explore Now"
         },
         {
-            img: "https://wallpapercave.com/wp/wp10612554.jpg",
+            img: "https://img.freepik.com/free-photo/young-man-holding-shopping-bags-showing-mobile-phone-screen-money-application-standing-yell_1258-155535.jpg",
             title: "New arrivals",
             desc: "Latest trending fashion",
             button: "Trending Now"
