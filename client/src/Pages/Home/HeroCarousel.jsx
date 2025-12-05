@@ -37,10 +37,14 @@ export default function HeroCarousel() {
             style={{ width: "100%", borderRadius: "10px" }}
         >
             {banners.map((banner, index) => (
-                <SwiperSlide key={index}>
+                <SwiperSlide
+                    key={index}
+                    className="w-[70%] flex items-center justify-center"
+                >
                     <div
                         style={{
-                            height: "420px",
+                            width: '80%',
+                            height: "60vh",
                             backgroundImage: `url(${banner.img})`,
                             backgroundSize: "cover",
                             backgroundPosition: "center",
@@ -51,19 +55,20 @@ export default function HeroCarousel() {
                             fontFamily: "Poppins"
                         }}
                     >
-                        <div>
+                        <div className="w-full ml-28 !text-rose-950">
                             <h1 style={{ fontSize: "42px", marginBottom: "10px" }}>
                                 {banner.title}
                             </h1>
                             <p style={{ fontSize: "18px" }}>{banner.desc}</p>
                             <Button
+                                className="link"
                                 style={{
                                     marginTop: "15px",
-                                    padding: "10px 25px",
+                                    // padding: "10px 25px",
                                     background: "white",
-                                    border: "none",
+                                    // border: "none",
                                     borderRadius: "5px",
-                                    fontWeight: "600",
+                                    fontWeight: "500",
                                     cursor: "pointer"
                                 }}
                             >
