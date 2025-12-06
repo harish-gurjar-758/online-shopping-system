@@ -28,7 +28,7 @@ body {
     background: #ff5252;
 }
 
-.link{
+.link {
     color: black !important;
 }
 
@@ -36,6 +36,22 @@ body {
     color: #ff5252 !important;
 }
 
-.MuiBadge-badge{
+.MuiBadge-badge {
     background-color: #ff5252 !important
+}
+
+.card {
+    width: 200px;
+    border-radius: 5px !important;
+}
+
+.card img {
+    border-top-left-radius: 5px !important;
+    border-top-right-radius: 5px !important;
+}
+
+.cart-btn {
+    border: 2px solid #ff5252 !important;
+    color: #ff5252 !important;
+    padding: 5px 20px 5px 20px !important;
 }
