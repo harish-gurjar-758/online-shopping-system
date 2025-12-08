@@ -40,12 +40,19 @@ body {
     background-color: #ff5252 !important
 }
 
-.card {
-    width: 200px;
+.mySwiper .card {
+    width: 200px !important;
     border-radius: 5px !important;
+    display: none !important;
 }
 
-.card img {
+.mySwiper .card .img{
+    width: 100% !important;
+    height: 200px !important;
+    display: none;
+} 
+
+.mySwiper .card img {
     border-top-left-radius: 5px !important;
     border-top-right-radius: 5px !important;
 }
@@ -54,4 +61,5 @@ body {
     border: 2px solid #ff5252 !important;
     color: #ff5252 !important;
     padding: 5px 20px 5px 20px !important;
+    z-index: 10px !important;
 }
