@@ -43,8 +43,8 @@ export default function HeroCarousel() {
                 >
                     <div
                         style={{
-                            width: '80%',
-                            height: "60vh",
+                            width: '100%',
+                            height: "70vh",
                             backgroundImage: `url(${banner.img})`,
                             backgroundSize: "cover",
                             backgroundPosition: "center",

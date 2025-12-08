@@ -1,0 +1,25 @@
+/* Make arrows visible */
+.swiper-button-prev,
+.swiper-button-next {
+    padding: 4px 4px 4px 4px;
+    border-radius: 50%;
+    color: white !important;     /* Arrow color */
+    z-index: 9999 !important;   /* Bring arrows on top */
+    background: #ff5252;
+    box-shadow: #9e4545 1px 0 10px;
+}
+
+/* Optional: change arrow size */
+.swiper-button-prev::after,
+.swiper-button-next::after {
+    font-size: 10px !important;
+    font-weight: bold;
+}
+
+/* Position fix so arrows do not overlap content */
+.swiper-button-prev {
+    left: 10px !important;
+}
+.swiper-button-next {
+    right: 10px !important;
+}
