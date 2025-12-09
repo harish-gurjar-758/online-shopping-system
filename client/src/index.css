@@ -41,15 +41,8 @@ body {
 }
 
 .mySwiper .card {
-    width: 200px !important;
     border-radius: 5px !important;
     display: none !important;
-}
-
-.mySwiper .card .img{
-    width: 100% !important;
-    height: 200px !important;
-    display: none;
 } 
 
 .mySwiper .card img {
