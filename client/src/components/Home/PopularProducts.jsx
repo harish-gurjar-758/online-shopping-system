@@ -168,7 +168,7 @@ export default function PopularProducts() {
                         >
                             {category.map((cat, index) => (
                                 <SwiperSlide key={index}>
-                                    <h3>{cat}</h3>
+                                    <h3 className='cursor-pointer'>{cat}</h3>
                                 </SwiperSlide>
                             ))}
                         </Swiper>
