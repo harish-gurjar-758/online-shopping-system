@@ -29,7 +29,7 @@ export default function BigSavingDaysSale() {
         <div className='w-full'>
             <div className="container flex items-center justify-center gap-10">
 
-                <div className='w-[40%] h-[40vh] '>
+                <div className='w-[60%] h-[533px] '>
                     <Swiper
                         modules={[Navigation, Autoplay]}
                         navigation
@@ -57,24 +57,34 @@ export default function BigSavingDaysSale() {
                     </Swiper>
                 </div>
 
-                <div className='container'>
+                <div className='container w-[40%] flex flex-col items-center justify-center gap-4'>
                     <div
-                        style={{
-                            backgroundImage: "url('https://serviceapi.spicezgold.com/download/1760160666204_1737020916820_New_Project_52.jpg')"
-                        }}
+                        className='w-[425px] h-[285px] relative'
                     >
-                        <h3>Buy women with low price</h3>
-                        <p>₹999</p>
+                        <img
+                            src="https://serviceapi.spicezgold.com/download/1760160666204_1737020916820_New_Project_52.jpg" alt=""
+                            className='w-full transition-all duration-150 group-hover:scale-105'
+                        />
+                        <div className='info absolute p-5 top-0 right-0 w-[70%] h-[100%] z-50 flex items-center justify-center flex-col gap-2 pl-16'>
+                            <h3 className='text-[25px] font-[500]'>Buy women with low price</h3>
+                            <p className='text-[20px]  text-[#ff5252] font-[500]'>₹999</p>
+                            <Link className='uppercase underline'>Shop Now</Link>
+
+                        </div>
                     </div>
 
                     <div
-                        style={{
-                            backgroundImage: "url('https://serviceapi.spicezgold.com/download/1741664665391_1741497254110_New_Project_50.jpg')"
-                        }}
+                        className='w-[425px] h-[285px] relative'
                     >
-                        <h1>Buy Men's Footwear with low price</h1>
-                        <p>₹1500</p>
-                        <Link>Shop Now</Link>
+                        <img
+                            src="https://serviceapi.spicezgold.com/download/1741664665391_1741497254110_New_Project_50.jpg" alt=""
+                            className='w-full transition-all duration-150 group-hover:scale-105'
+                        />
+                        <div className='info absolute p-5 top-0 right-0 w-[70%] h-[100%] z-50 flex items-center justify-center flex-col gap-2 pl-16'>
+                            <h3 className='text-[25px] font-[500]'>Buy Men's Footwear with low price</h3>
+                            <p className='text-[20px]  text-[#ff5252] font-[500]'>₹1500</p>
+                            <Link className='uppercase underline'>Shop Now</Link>
+                        </div>
                     </div>
                 </div>
 
