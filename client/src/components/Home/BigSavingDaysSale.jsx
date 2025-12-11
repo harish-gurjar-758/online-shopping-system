@@ -59,7 +59,7 @@ export default function BigSavingDaysSale() {
 
                 <div className='container w-[40%] flex flex-col items-center justify-center gap-4'>
                     <div
-                        className='w-[425px] h-[285px] relative'
+                        className='w-[425px] h-[285px] relative rounded-md'
                     >
                         <img
                             src="https://serviceapi.spicezgold.com/download/1760160666204_1737020916820_New_Project_52.jpg" alt=""
@@ -74,7 +74,7 @@ export default function BigSavingDaysSale() {
                     </div>
 
                     <div
-                        className='w-[425px] h-[285px] relative'
+                        className='w-[425px] h-[285px] relative rounded-md'
                     >
                         <img
                             src="https://serviceapi.spicezgold.com/download/1741664665391_1741497254110_New_Project_50.jpg" alt=""
