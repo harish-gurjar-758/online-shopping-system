@@ -1,9 +1,14 @@
 import React from 'react'
+import './Home.css'
+
+// Components
 import HeroCarousel from '../../components/Home/HeroCarousel'
 import PopularProducts from '../../components/Home/PopularProducts'
 import HomeCatSlider from '../../components/Home/HomeCatSlider'
-import './Home.css'
 import BigSavingDaysSale from '../../components/Home/BigSavingDaysSale'
+import FreeDeliverySection from '../../components/Home/FreeDeliverySection'
+
+
 
 export default function Home() {
   return (
@@ -17,6 +22,7 @@ export default function Home() {
       <div className='w-full bg-white'>
         <PopularProducts />
         <BigSavingDaysSale />
+        <FreeDeliverySection />
       </div>
 
     </div>
