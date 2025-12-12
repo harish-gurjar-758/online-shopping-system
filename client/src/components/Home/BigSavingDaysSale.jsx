@@ -76,7 +76,7 @@ export default function BigSavingDaysSale() {
                     <div className='bannerBoxV2 box w-full overflow-hidden rounded-md group relative'>
                         <img
                             src="https://serviceapi.spicezgold.com/download/1741664665391_1741497254110_New_Project_50.jpg" alt=""
-                            className='w-full transition-all duration-150 group-hover:scale-105'
+                            className='w-full transition-all object-bottom duration-150 group-hover:scale-105'
                         />
                         <div className='info absolute p-5 top-0 right-0 w-[60%] h-[100%] z-50 flex items-start justify-center flex-col gap-2'>
                             <h2 className='text-[14px] md:text-[18px] font-[600]'>Buy Men's Footwear with low price</h2>
