@@ -23,9 +23,12 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 
 export default function Header() {
     return (
-        <header className='bg-white'>
+        <header className='w-full bg-white fixed top-0 lg:sticky lg:-top-[47px]' style={{
+            zIndex: "10000"
+        }}>
             {/* --start-- */}
-            <div className="top-strip py-2 border-t-[1px] border-b-[1px] border-gray-250">
+            {/* <div className="top-strip py-2 border-t-[1px] border-b-[1px] border-gray-250"> */}
+            <div className="top-strip hidden lg:block py-2 border-t-[1px] border-gray-250  border-b-[1px]">
                 <div className="container">
                     <div className="flex items-center justify-between">
                         <div className="col1 w-[50%]">

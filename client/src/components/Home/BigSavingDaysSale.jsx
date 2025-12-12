@@ -29,13 +29,13 @@ export default function BigSavingDaysSale() {
         <div className='w-full py-5 mb-5'>
             <div className="container flex items-center justify-center gap-10">
 
-                <div className='w-[70%] h-[533px] '>
+                <div className='w-[70%] h-[550px] '>
                     <Swiper
                         modules={[Navigation, Autoplay]}
                         navigation
                         autoplay={{ delay: 3500 }}
                         loop={true}
-                        className='mySwiper h-full'
+                        className='mySwiper h-full rounded-md'
                     >
                         {BigSavingDaysSaleData.map((item) => (
                             <SwiperSlide key={item.id} className='w-full h-full'>
