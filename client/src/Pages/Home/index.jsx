@@ -8,6 +8,7 @@ import HomeCatSlider from '../../components/Home/HomeCatSlider'
 import BigSavingDaysSale from '../../components/Home/BigSavingDaysSale'
 import FreeDeliverySection from '../../components/Home/FreeDeliverySection'
 import LatestProducts from '../../components/Home/LatestProducts'
+import FeaturedProducts from '../../components/Home/FeaturedProducts'
 
 
 
@@ -24,7 +25,8 @@ export default function Home() {
         <PopularProducts />
         <BigSavingDaysSale />
         <FreeDeliverySection />
-        <LatestProducts/>
+        <LatestProducts />
+        <FeaturedProducts />
       </div>
 
     </div>
