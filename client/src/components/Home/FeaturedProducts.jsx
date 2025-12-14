@@ -18,7 +18,7 @@ import "swiper/css/navigation";
 import { Navigation } from 'swiper/modules';
 
 export default function FeaturedProducts() {
-    
+
     const product = [
         {
             id: 11,
@@ -147,11 +147,10 @@ export default function FeaturedProducts() {
         return stars;
     };
 
-  return (
+    return (
         <div className='container pt-7'>
             <div className='w-full flex items-center justify-between'>
                 <h2 className='font-[600] text-[25px]'>Featured Products</h2>
-                <Button className='!text-black !lowercase !bg-gray-100'>View All</Button>
             </div>
 
             <Swiper
@@ -231,5 +230,5 @@ export default function FeaturedProducts() {
                 ))}
             </Swiper>
         </div>
-  )
+    )
 }
