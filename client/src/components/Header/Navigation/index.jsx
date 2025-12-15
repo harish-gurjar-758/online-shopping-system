@@ -31,43 +31,64 @@ export default function Navigation() {
             <ul className="flex items-center justify-evenly gap-1">
               <li className='list-none'>
                 <Link
-                to='/' 
-                 className='link transition text-[15px] '>
+                  to='/'
+                  className='link transition text-[15px] '>
                   <Button className='link transition font-[500]'>Home</Button>
                 </Link>
               </li>
               <li className='list-none'>
-                <Link className='link transition text-[15px] '>
+                <Link
+                  to='/product'
+                  className='link transition text-[15px] '
+                >
                   <Button className='link transition font-[500]'>Fashion</Button>
                 </Link>
               </li>
               <li className='list-none'>
-                <Link className='link transition text-[15px]'>
+                <Link
+                  to='/product'
+                  className='link transition text-[15px]'
+                >
                   <Button className='link transition font-[500]'>Bags</Button>
                 </Link>
               </li>
               <li className='list-none'>
-                <Link className='link transition text-[15px]'>
+                <Link
+                  to='/product'
+                  className='link transition text-[15px]'
+                >
                   <Button className='link transition font-[500]'>Footwear</Button>
                 </Link>
               </li>
               <li className='list-none'>
-                <Link className='link transition text-[15px]'>
+                <Link
+                  to='/product'
+                  className='link transition text-[15px]'
+                >
                   <Button className='link transition font-[500]'>Groceries</Button>
                 </Link>
               </li>
               <li className='list-none'>
-                <Link className='link transition text-[15px]'>
+                <Link
+                  to='/product'
+                  className='link transition text-[15px]'
+                >
                   <Button className='link transition font-[500]'>Beauty</Button>
                 </Link>
               </li>
               <li className='list-none'>
-                <Link className='link transition text-[15px]'>
+                <Link
+                  to='/product'
+                  className='link transition text-[15px]'
+                >
                   <Button className='link transition font-[500]'>Wellness</Button>
                 </Link>
               </li>
               <li className='list-none'>
-                <Link className='link transition text-[15px]'>
+                <Link
+                  to='/product'
+                  className='link transition text-[15px]'
+                >
                   <Button className='link transition font-[500]'>Jewellery</Button>
                 </Link>
               </li>

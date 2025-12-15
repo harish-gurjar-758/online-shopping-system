@@ -115,11 +115,11 @@ export default function CategoryPanel(props) {
                             key={cat.id}
                             className="list-none w-full flex items-center justify-between flex-wrap relative"
                         >
-                            <Link to='' className="link w-full">
+                            <Link to={`/product/${cat.id}`} className="link w-full">
                                 <Button
                                     disableRipple
                                     className="w-full !text-left !justify-start !px-3 link"
-                                    // onClick={() => cat.subCategories && toggleCat(cat.id)}
+                                // onClick={() => cat.subCategories && toggleCat(cat.id)}
                                 >
                                     {cat.categoryName}
                                 </Button>
