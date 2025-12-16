@@ -1,17 +1,16 @@
 import React from 'react'
 import { MdOutlineKeyboardArrowUp, MdOutlineKeyboardArrowDown } from "react-icons/md";
+import SideControllers from '../../components/CategoryProduct/SideControllers';
 
 
 export default function Product() {
     return (
         <div className='w-full flex items-center'>
-            <div>
+            <div className='w-[20%]'>
                 <div>
                     <div>
                         <h2>Shop by Category <MdOutlineKeyboardArrowUp /> <MdOutlineKeyboardArrowDown /> </h2>
-                        <div>
-
-                        </div>
+                        <SideControllers />
                     </div>
                 </div>
             </div>
