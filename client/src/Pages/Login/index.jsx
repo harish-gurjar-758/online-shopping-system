@@ -29,7 +29,6 @@ export default function Login() {
                                 variant="contained"
                                 className="!mt-3 !w-full !bg-[#ff5252] hover:!bg-[#fe6d6d] z-10"
                             >
-
                                 Register
                             </Button>
                             <p className='text-center'>
