@@ -74,7 +74,7 @@ export default function Header() {
                         <ul className="flex items-center gap-3">
                             <li className="list-none">
                                 <Link className="link transition text-[15px] font-[500]">Login</Link> &nbsp;| &nbsp;
-                                <Link className="link transition text-[15px] font-[500]">Register</Link>
+                                <Link to={'/register'} className="link transition text-[15px] font-[500]">Register</Link>
                             </li>
                             <li>
                                 <Tooltip title="Compare">
