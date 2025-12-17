@@ -1,10 +1,12 @@
 import React from 'react'
 import Button from '@mui/material/Button'
+import { Link } from 'react-router-dom';
+
 export default function Register() {
   return (
     <div className='w-full h-full flex items-center justify-center py-6'>
       <div className="container">
-        <div className='w-full card shadow-md w-full sm:w-[400px] m-auto rounded-md bg-white p-5 px-10'>
+        <div className='w-full card shadow-md sm:w-[400px] m-auto rounded-md bg-white p-5 px-10'>
           <div className='w-full bg-white py-5 px-5 flex flex-col gap-5'>
             <h3 className='text-center text-[18px] text-black'>Register with a new account</h3>
             <form className='w-full flex flex-col gap-5 mt-5'>
@@ -33,6 +35,8 @@ export default function Register() {
               </Button>
               <p className='text-center'>
                 Already have an account?
+                <Link>
+                </Link>
                 <a href="/login" className='text-blue-500 hover:underline'>Login</a>
               </p>
               <p className='text-center font-[500]'>Or continue with social account</p>
