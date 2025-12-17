@@ -23,7 +23,6 @@ export default function Login() {
                             <p className="link font-medium w-fit cursor-pointer">
                                 Forgot Password?
                             </p>
-                            {/* <Link className='link !font-bold !text-gray text-[15px] w-fit'></Link> */}
                             <Button
                                 fullWidth
                                 variant="contained"
