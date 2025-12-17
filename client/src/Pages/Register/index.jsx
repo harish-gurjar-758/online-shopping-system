@@ -37,7 +37,7 @@ export default function Register() {
                 Already have an account?
                 <Link>
                 </Link>
-                <a href="/login" className='text-blue-500 hover:underline'>Login</a>
+                <a href="/login" className='text-primary hover:underline'>Login</a>
               </p>
               <p className='text-center font-[500]'>Or continue with social account</p>
               <Button className='MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary flex gap-3 w-full !bg-[#f1f1f1] btn-lg !text-black css-iyey26'>
