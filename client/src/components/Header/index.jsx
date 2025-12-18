@@ -73,7 +73,7 @@ export default function Header() {
                     <div className="col3 w-[30%] flex items-center justify-end">
                         <ul className="flex items-center gap-3">
                             <li className="list-none">
-                                <Link className="link transition text-[15px] font-[500]">Login</Link> &nbsp;| &nbsp;
+                                <Link to={'/login'} className="link transition text-[15px] font-[500]">Login</Link> &nbsp;| &nbsp;
                                 <Link to={'/register'} className="link transition text-[15px] font-[500]">Register</Link>
                             </li>
                             <li>

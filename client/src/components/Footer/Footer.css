@@ -1,0 +1,5 @@
+.footer-card:hover .icon {
+    color: #ff5252;
+    transition: all;
+    translate: y 1px;
+}
