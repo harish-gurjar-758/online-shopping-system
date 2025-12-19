@@ -31,6 +31,16 @@ export default function Header() {
         <header className='w-full bg-white fixed top-0 lg:sticky lg:-top-[47px]' style={{
             zIndex: "10000"
         }}>
+
+            {/* --start-- */}
+            <CartBox
+                isOpenCartBox={isOpenCartBox}
+                setIsOpenCartBox={setIsOpenCartBox}
+                className="!z-[10022]"
+            />
+            {/* --end-- */}
+
+
             {/* --start-- */}
             <CartBox
                 isOpenCartBox={isOpenCartBox}
@@ -109,8 +119,7 @@ export default function Header() {
                                 </Tooltip>
                             </li>
                             <li>
-                                <Tooltip
-                                    title="Cart"
+                                <Tooltip title="Cart"
                                     onClick={openCartBoxPanel}
                                 >
                                     <IconButton aria-label="cart">
@@ -129,6 +138,7 @@ export default function Header() {
             {/* --start-- */}
             <Navigation />
             {/* --end-- */}
+
         </header>
     )
 }
