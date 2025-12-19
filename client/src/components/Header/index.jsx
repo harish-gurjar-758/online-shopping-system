@@ -32,6 +32,16 @@ export default function Header() {
         <header className='w-full bg-white fixed top-0 lg:sticky lg:-top-[47px]' style={{
             zIndex: "10000"
         }}>
+
+            {/* --start-- */}
+            <CartBox
+                isOpenCartBox={isOpenCartBox}
+                setIsOpenCartBox={setIsOpenCartBox}
+                className="!z-[10022]"
+            />
+            {/* --end-- */}
+
+
             {/* --start-- */}
             {/* <div className="top-strip py-2 border-t-[1px] border-b-[1px] border-gray-250"> */}
             <div className="top-strip hidden lg:block py-2 border-t-[1px] border-gray-250  border-b-[1px]">
@@ -121,12 +131,6 @@ export default function Header() {
             <Navigation />
             {/* --end-- */}
 
-            {/* --start-- */}
-            <CartBox
-                isOpenCartBox={isOpenCartBox}
-                setIsOpenCartBox={setIsOpenCartBox} 
-            />
-            {/* --end-- */}
         </header>
     )
 }
