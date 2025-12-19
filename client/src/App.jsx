@@ -5,6 +5,7 @@ import Product from "./Pages/CategoryProduct";
 import Register from "./Pages/Register";
 import Login from "./Pages/Login";
 import Footer from "./components/Footer";
+import WishList from "./Pages/WishList";
 
 
 function App() {
@@ -22,6 +23,9 @@ function App() {
         {/* User Register and Login Pages */}
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+
+        {/* -- */}
+        <Route path="/mylist" element={<WishList />} />
 
       </Routes>
 

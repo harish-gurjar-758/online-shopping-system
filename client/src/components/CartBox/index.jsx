@@ -2,7 +2,7 @@ import React from 'react';
 import Drawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import emptyCart from '../../assets/Assets/empty-cart.png';
+import emptyCart from '../../assets/AssetsMedia/empty-cart.png';
 
 export default function CartBox({ isOpenCartBox, setIsOpenCartBox }) {
 
