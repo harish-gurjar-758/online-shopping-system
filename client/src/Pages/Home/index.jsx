@@ -9,6 +9,7 @@ import BigSavingDaysSale from '../../components/Home/BigSavingDaysSale'
 import FreeDeliverySection from '../../components/Home/FreeDeliverySection'
 import LatestProducts from '../../components/Home/LatestProducts'
 import FeaturedProducts from '../../components/Home/FeaturedProducts'
+import CartBox from '../../components/CartBox'
 
 
 
