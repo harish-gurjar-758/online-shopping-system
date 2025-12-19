@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Search from '../Search';
 import Badge from '@mui/material/Badge';
@@ -9,6 +9,7 @@ import CompareArrowsIcon from '@mui/icons-material/CompareArrows';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import Tooltip from '@mui/material/Tooltip';
 import Navigation from './Navigation';
+import CartBox from '../CartBox';
 
 // --- Start
 const StyledBadge = styled(Badge)(({ theme }) => ({
@@ -22,10 +23,23 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 // --- End
 
 export default function Header() {
+    const [isOpenCartBox, setIsOpenCartBox] = useState(false);
+    const openCartBoxPanel = () => {
+        setIsOpenCartBox(true);
+    }
     return (
         <header className='w-full bg-white fixed top-0 lg:sticky lg:-top-[47px]' style={{
             zIndex: "10000"
         }}>
+            {/* --start-- */}
+            <CartBox
+                isOpenCartBox={isOpenCartBox}
+                setIsOpenCartBox={setIsOpenCartBox}
+                className="!z-[10022]"
+            />
+            {/* --end-- */}
+
+
             {/* --start-- */}
             {/* <div className="top-strip py-2 border-t-[1px] border-b-[1px] border-gray-250"> */}
             <div className="top-strip hidden lg:block py-2 border-t-[1px] border-gray-250  border-b-[1px]">
@@ -95,7 +109,10 @@ export default function Header() {
                                 </Tooltip>
                             </li>
                             <li>
-                                <Tooltip title="Cart">
+                                <Tooltip
+                                    title="Cart"
+                                    onClick={openCartBoxPanel}
+                                >
                                     <IconButton aria-label="cart">
                                         <StyledBadge badgeContent={4} color="secondary">
                                             <ShoppingCartIcon />
