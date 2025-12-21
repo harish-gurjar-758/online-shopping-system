@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Button from "@mui/material/Button";
 import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
 import StarIcon from '@mui/icons-material/Star';
@@ -16,8 +16,12 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from 'swiper/modules';
+import ProductDetailedSection from './ProductDetailed';
+import { IoMdClose } from "react-icons/io";
+
 
 export default function PopularProducts() {
+    const [openDetails, setOpenDetails] = useState(false);
 
     const category = [
         "Fashion", "Electronics", "Shoes", "Grocery", "Beauty", "Sports", "jewellery", "Bags"
@@ -151,9 +155,16 @@ export default function PopularProducts() {
         return stars;
     };
 
+    // ------
+    const handleShowDetails = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setOpenDetails(true);
+    }
+
     return (
         <div className='w-full bg-white py-10'>
-            <div className='container'>
+            <div className='container relative'>
                 <div className='!w-full flex items-center !justify-between gap-6 mb-10'>
                     <div className='w-[40%]'>
                         <h2 className='font-bold text-[25px]'>Popular Products</h2>
@@ -194,7 +205,10 @@ export default function PopularProducts() {
                                     <p className='w-[30px] h-[30px] absolute top-3 left-3 text-center flex items-center justify-center rounded-[100%] p-4 text-[14px] bg-[#ff5252] text-white'>8%</p>
 
                                     <div className='absolute right-3 top-4 flex flex-col gap-4' >
-                                        <div className=' bg-white rounded-[100%] text-[20px] p-2 text-black' >
+                                        <div
+                                            className=' bg-white rounded-[100%] text-[20px] p-2 text-black'
+                                            onClick={handleShowDetails}
+                                        >
                                             <MdOutlineZoomOutMap />
                                         </div>
                                         <div className=' bg-white rounded-[100%] text-[20px] p-2 text-black' >
@@ -252,6 +266,22 @@ export default function PopularProducts() {
                         </SwiperSlide>
                     ))}
                 </Swiper>
+
+                {/* MODAL */}
+                {openDetails && (
+                    <div className="fixed inset-0 z-[10000] bg-black/50 flex items-center justify-center">
+                        <div className="bg-white p-5 rounded relative w-[80%]">
+                            <button
+                                className="absolute top-3 right-3 text-xl"
+                                onClick={() => setOpenDetails(false)}
+                            >
+                                <IoMdClose />
+                            </button>
+                            <ProductDetailedSection />
+                        </div>
+                    </div>
+                )}
+
             </div>
 
         </div>
