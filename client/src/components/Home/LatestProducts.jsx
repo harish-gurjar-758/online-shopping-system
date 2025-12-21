@@ -1,5 +1,5 @@
 import Button from '@mui/material/Button'
-import React from 'react';
+import React, { useState } from 'react';
 import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
 import StarIcon from '@mui/icons-material/Star';
 import StarHalfIcon from '@mui/icons-material/StarHalf';
@@ -16,8 +16,18 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from 'swiper/modules';
+import ProductDetailedSection from './ProductDetailed';
+import { IoMdClose } from "react-icons/io";
 
 export default function LatestProducts() {
+    const [openDetails, setOpenDetails] = useState(false);
+
+    // ------
+    const handleShowDetails = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setOpenDetails(true);
+    }
 
     const product = [
         {
@@ -172,7 +182,10 @@ export default function LatestProducts() {
                                 <p className='w-[30px] h-[30px] absolute top-3 left-3 text-center flex items-center justify-center rounded-[100%] p-4 text-[14px] bg-[#ff5252] text-white'>8%</p>
 
                                 <div className='absolute right-3 top-4 flex flex-col gap-4' >
-                                    <div className=' bg-white rounded-[100%] text-[20px] p-2 text-black' >
+                                    <div
+                                        className=' bg-white rounded-[100%] text-[20px] p-2 text-black'
+                                        onClick={handleShowDetails}
+                                    >
                                         <MdOutlineZoomOutMap />
                                     </div>
                                     <div className=' bg-white rounded-[100%] text-[20px] p-2 text-black' >
@@ -230,6 +243,20 @@ export default function LatestProducts() {
                     </SwiperSlide>
                 ))}
             </Swiper>
+            {/* MODAL */}
+            {openDetails && (
+                <div className="fixed inset-0 z-[10000] bg-black/50 flex items-center justify-center">
+                    <div className="bg-white p-5 rounded relative w-[80%]">
+                        <button
+                            className="absolute top-3 right-3 text-xl"
+                            onClick={() => setOpenDetails(false)}
+                        >
+                            <IoMdClose />
+                        </button>
+                        <ProductDetailedSection />
+                    </div>
+                </div>
+            )}
         </div>
     )
 }
