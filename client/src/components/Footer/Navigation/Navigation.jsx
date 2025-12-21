@@ -86,14 +86,6 @@ export default function Navigation() {
         <form className='mt-5 flex flex-col items-center justify-center gap-3'>
           <input type="text" className='w-full border-2 border-gray outline-none rounded px-3 py-2' placeholder='Your Email Address' />
 
-          {/* --Button start */}
-          <Button
-            fullWidth
-            variant="contained"
-            className='!mt-3 !w-fit !bg-[#ff5252] hover:!bg-[#fe6d6d] z-10'
-          >Subscribe</Button>
-          {/* --end-- */}
-
           <FormControlLabel
             required
             control={<Checkbox />}
@@ -105,6 +97,15 @@ export default function Navigation() {
               }
             }}
           />
+
+          {/* --Button start */}
+          <Button
+            fullWidth
+            variant="contained"
+            className='!mt-3 !w-fit !bg-[#ff5252] hover:!bg-[#fe6d6d] z-10'
+          >Subscribe</Button>
+          {/* --end-- */}
+
         </form>
       </div>
       {/* --End-- */}

@@ -8,6 +8,7 @@ import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import { FaRegHeart } from "react-icons/fa";
 import { LuGitCompareArrows } from "react-icons/lu";
 import BottomSection from '../../components/ProductDetailed/BottomSection';
+import RelatedProducts from '../../components/ProductDetailed/RelatedProducts';
 
 
 
@@ -90,6 +91,7 @@ export default function ProductDetailed() {
                 </div>
             </div>
             <BottomSection />
+            <RelatedProducts />
         </div>
     )
 }

@@ -36,7 +36,7 @@ export default function Footer() {
                             <AiOutlineInstagram />
                         </Link>
                     </div>
-                    <p className='text-[13px] text-center mb-0'>© 2024 - Ecommerce Template</p>
+                    <p className='text-[13px] text-center mb-0'>© 2024 - Marwad shop</p>
                     <div className='flex items-center gap-1'>
                         <img src="https://ecommerce-frontend-view.netlify.app/carte_bleue.png" alt="" />
                         <img src="https://ecommerce-frontend-view.netlify.app/visa.png" alt="" />
