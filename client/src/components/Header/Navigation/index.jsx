@@ -13,6 +13,16 @@ export default function Navigation() {
   }
   return (
     <>
+
+      {/* Category Panel component */}
+      {/* --Start-- */}
+      <CategoryPanel
+        // openCategoryPanel={openCategoryPanel}
+        isOpenCategoryPanel={isOpenCategoryPanel}
+        setIsOpenCategory={setIsOpenCategory}
+      />
+      {/* --End-- */}
+
       {/* --Start-- */}
       <nav className='py-2'>
         <div className="container flex items-center justify-end gap-5">
@@ -105,14 +115,6 @@ export default function Navigation() {
       </nav>
       {/* --End-- */}
 
-      {/* Category Panel component */}
-      {/* --Start-- */}
-      <CategoryPanel
-        // openCategoryPanel={openCategoryPanel}
-        isOpenCategoryPanel={isOpenCategoryPanel}
-        setIsOpenCategory={setIsOpenCategory}
-      />
-      {/* --End-- */}
     </>
   );
 }

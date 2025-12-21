@@ -11,26 +11,31 @@ export default function CartBox({ isOpenCartBox, setIsOpenCartBox }) {
     };
 
     return (
-        <Drawer
-            open={isOpenCartBox}
-            onClose={toggleDrawer(false)}
-            anchor="right"
-        >
-            <Box sx={{ width: 480 }}
-                role="presentation" className='cartBoxPanel'
+        <div className='absolute z-[10000]'>
+            <Drawer
+                open={isOpenCartBox}
+                onClose={toggleDrawer(false)}
+                anchor="right"
+                ModalProps={{
+                    keepMounted: true,
+                }}
             >
-                <header>
-                    <h2 className='p-4 border-b-[1px] border-gray-200 font-[600]'>Shopping Cart</h2>
-                    {/* Cart items and details would go here */}
-                </header>
-                <div className="container mt-[100px]">
-                    <div className="flex items-center justify-center flex-col gap-4">
-                        <img src={emptyCart} alt="Empty Cart" width={150} />
-                        <p className="text-center font-[500]">Your Cart is currently empty</p>
-                        <Button className="!mt-3 !w-fill !bg-[#ff5252] hover:!bg-[#fe6d6d] z-10 !text-white">Continue Shopping</Button>
+                <Box sx={{ width: 480 }}
+                    role="presentation" className='cartBoxPanel'
+                >
+                    <header>
+                        <h2 className='p-4 border-b-[1px] border-gray-200 font-[600]'>Shopping Cart</h2>
+                        {/* Cart items and details would go here */}
+                    </header>
+                    <div className="container mt-[100px]">
+                        <div className="flex items-center justify-center flex-col gap-4">
+                            <img src={emptyCart} alt="Empty Cart" width={150} />
+                            <p className="text-center font-[500]">Your Cart is currently empty</p>
+                            <Button className="!mt-3 !w-fill !bg-[#ff5252] hover:!bg-[#fe6d6d] z-10 !text-white">Continue Shopping</Button>
+                        </div>
                     </div>
-                </div>
-            </Box>
-        </Drawer>
+                </Box>
+            </Drawer>
+        </div>
     );
 }
