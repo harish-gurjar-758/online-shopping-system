@@ -6,6 +6,7 @@ import Register from "./Pages/Register";
 import Login from "./Pages/Login";
 import Footer from "./components/Footer";
 import WishList from "./Pages/WishList";
+import ProductDetailed from "./Pages/ProductDetailed";
 
 
 function App() {
@@ -19,6 +20,9 @@ function App() {
 
         {/* Show by category : id */}
         <Route path="/product" element={<Product />} />
+
+        {/* Show product by : id */}
+        <Route path='/product-detailed/:id' element={<ProductDetailed />} />
 
         {/* User Register and Login Pages */}
         <Route path="/register" element={<Register />} />

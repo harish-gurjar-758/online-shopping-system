@@ -187,7 +187,7 @@ export default function PopularProducts() {
                         <SwiperSlide key={pro.id} className='!card mt-3 mb-3 ml-2 !w-[250px] border border-grey shadow-[1px_0_10px_#f5f0f0] rounded'>
 
                             <Link
-                                // to={`/product-details/${pro.title.replace(/\s+/g, '-').toLowerCase()}`}
+                                to={`/product-detailed/${pro.id}`}
                                 className='border-l-pink-950'
                             >
                                 <div className="!img w-full h-[250px] overflow-hidden rounded-tl rounded-tr relative">
@@ -211,7 +211,7 @@ export default function PopularProducts() {
                                     />
                                 </div>
 
-                                <div className='w-[250px] flex items-start flex-col gap-3 px-2 py-2'>
+                                <div className='w-[250px] flex items-start flex-col gap-3 px-2 py-2 relative'>
                                     <p className='text-[13px] font-[500] text-stone-500'>
                                         {pro.braned}{pro.id}
                                     </p>
@@ -242,7 +242,7 @@ export default function PopularProducts() {
                                     <Button
                                         fullWidth
                                         variant="contained"
-                                        className="!mt-3 !w-full !bg-[#ff5252] hover:!bg-[#fe6d6d] z-10"
+                                        className="!mt-3 !w-full !bg-[#ff5252] hover:!bg-[#fe6d6d] z-10 absolute"
                                     >
                                         <LocalGroceryStoreIcon className='mr-2' />
                                         Add to cart
