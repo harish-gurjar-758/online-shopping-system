@@ -48,7 +48,7 @@ export default function Navigation() {
               </li>
               <li className='list-none'>
                 <Link
-                  to={`/category/product/${id}`}
+                  to='/product'
                   className='link transition text-[15px] '
                 >
                   <Button className='link transition font-[500]'>Fashion</Button>

@@ -1,67 +1,94 @@
-import React from 'react'
-import PropTypes from 'prop-types';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import CssBaseline from '@mui/material/CssBaseline';
-import useScrollTrigger from '@mui/material/useScrollTrigger';
+import React, { useState } from 'react'
+import ListSubheader from '@mui/material/ListSubheader';
+import List from '@mui/material/List';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import Collapse from '@mui/material/Collapse';
+import InboxIcon from '@mui/icons-material/MoveToInbox';
+import DraftsIcon from '@mui/icons-material/Drafts';
+import SendIcon from '@mui/icons-material/Send';
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+
+// ----
 import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
+import Slider from '@mui/material/Slider';
 
 
-function ElevationScroll(props) {
-    const { children, window } = props;
-    // Note that you normally won't need to set the window ref as useScrollTrigger
-    // will default to window.
-    // This is only being set here because the demo is in an iframe.
-    const trigger = useScrollTrigger({
-        disableHysteresis: true,
-        threshold: 0,
-        target: window ? window() : undefined,
-    });
-
-    return children
-        ? React.cloneElement(children, {
-            elevation: trigger ? 4 : 0,
-        })
-        : null;
+function valuetext(value) {
+    return `${value}°C`;
 }
 
-ElevationScroll.propTypes = {
-    children: PropTypes.element,
-    /**
-     * Injected by the documentation to work in an iframe.
-     * You won't need it on your project.
-     */
-    window: PropTypes.func,
-};
+const minDistance = 10;
 
-export default function SideControllers(props) {
+export default function SideControllers() {
+    const [open, setOpen] = useState(true);
+
+    const handleClick = () => {
+        setOpen(!open);
+    };
+
+    // ---
+    const [value1, setValue1] = useState([20, 37]);
+
+    const handleChange1 = (event, newValue, activeThumb) => {
+        if (activeThumb === 0) {
+            setValue1([Math.min(newValue[0], value1[1] - minDistance), value1[1]]);
+        } else {
+            setValue1([value1[0], Math.max(newValue[1], value1[0] + minDistance)]);
+        }
+    };
+
     return (
-        <React.Fragment>
-            <CssBaseline />
-            <ElevationScroll {...props}>
-                <AppBar>
-                    <Toolbar>
-                        <Typography variant="h6" component="div">
-                            Scroll to elevate App bar
-                        </Typography>
-                    </Toolbar>
-                </AppBar>
-            </ElevationScroll>
-            <Toolbar />
-            <Container>
-                <Box sx={{ my: 2 }}>
-                    {[...new Array(12)]
-                        .map(
-                            () => `Cras mattis consectetur purus sit amet fermentum.
-Cras justo odio, dapibus ac facilisis in, egestas eget quam.
-Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
-                        )
-                        .join('\n')}
-                </Box>
-            </Container>
-        </React.Fragment>
+        <> <List
+            sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}
+            component="nav"
+            aria-labelledby="nested-list-subheader"
+        >
+            {/* --start-- */}
+            <ListItemButton onClick={handleClick}>
+                <ListItemText primary="Shop by Category" />
+                {open ? <ExpandLess /> : <ExpandMore />}
+            </ListItemButton>
+            <Collapse in={open} timeout="auto" unmountOnExit>
+                <List component="div" disablePadding>
+                    <FormGroup>
+                        <FormControlLabel control={<Checkbox defaultChecked />} label="Label" />
+                        <FormControlLabel required control={<Checkbox />} label="Required" />
+                    </FormGroup>
+
+                </List>
+            </Collapse >
+            {/* --end-- */}
+
+            {/* --Start-- */}
+            <ListItemText primary="Filter by Price" />
+
+            <Box sx={{ width: 300 }}>
+                <Slider
+                    getAriaLabel={() => 'Minimum distance'}
+                    value={value1}
+                    onChange={handleChange1}
+                    valueLabelDisplay="auto"
+                    getAriaValueText={valuetext}
+                    disableSwap
+                />
+            </Box>
+            {/* --end-- */}
+
+            {/* --start-- */}
+            <ListItemText primary="Drafts" />
+            <FormGroup>
+                <FormControlLabel control={<Checkbox defaultChecked />} label="Label" />
+                <FormControlLabel required control={<Checkbox />} label="Required" />
+            </FormGroup>
+
+            {/* --end-- */}
+        </List >
+        </>
     )
 }

@@ -16,9 +16,10 @@ function App() {
       {/* All Routes */}
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/product/:id" element={<Product />} />
 
         {/* Show by category : id */}
-        <Route path="/category/product/:id" element={<ProductByCategory />} />
+        <Route path="/product" element={<Product />} />
 
         {/* Show product by : id */}
         <Route path='/product-detailed/:id' element={<ProductDetailed />} />
