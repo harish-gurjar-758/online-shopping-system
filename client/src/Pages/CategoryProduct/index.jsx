@@ -3,7 +3,7 @@ import { MdOutlineKeyboardArrowUp, MdOutlineKeyboardArrowDown } from "react-icon
 import SideControllers from '../../components/CategoryProduct/SideControllers';
 
 
-export default function Product() {
+export default function ProductByCategory() {
     return (
         <div className='w-full flex items-center'>
             <div className='w-[20%]'>
