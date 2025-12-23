@@ -204,7 +204,8 @@ export default function PopularProducts() {
                                 <div className="!img w-full h-[250px] overflow-hidden rounded-tl rounded-tr relative">
                                     <p className='w-[30px] h-[30px] absolute top-3 left-3 text-center flex items-center justify-center rounded-[100%] p-4 text-[14px] bg-[#ff5252] text-white'>8%</p>
 
-                                    <div className='absolute right-3 top-4 flex flex-col gap-4' >
+                                    {/* <div className='absolute right-3 top-4 flex flex-col gap-4' > */}
+                                    <div className='actions absolute top-[-20px] right-[5px] z-50 flex items-center gap-2 flex-col w-[50px] transition-all duration-300 group-hover:top-[15px] opacity-0 group-hover:opacity-100' >
                                         <div
                                             className=' bg-white rounded-[100%] text-[20px] p-2 text-black'
                                             onClick={handleShowDetails}
