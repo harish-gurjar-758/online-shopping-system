@@ -1,110 +1,127 @@
-import React, { useState } from 'react'
-import ListSubheader from '@mui/material/ListSubheader';
-import List from '@mui/material/List';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import Collapse from '@mui/material/Collapse';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import DraftsIcon from '@mui/icons-material/Drafts';
-import SendIcon from '@mui/icons-material/Send';
+import React, { useState } from 'react';
+import {
+    List,
+    ListItemText,
+    Collapse,
+    FormGroup,
+    FormControlLabel,
+    Checkbox,
+    Box,
+    Slider
+} from '@mui/material';
+
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
+import StarIcon from '@mui/icons-material/Star';
 
-// ----
-import Box from '@mui/material/Box';
-import Slider from '@mui/material/Slider';
-
-
-function valuetext(value) {
-    return `${value}°C`;
-}
-
-const minDistance = 10;
+const minDistance = 500;
 
 export default function SideControllers() {
-    const [open, setOpen] = useState(true);
 
-    const handleClick = () => {
-        setOpen(!open);
-    };
+    const [openCategory, setOpenCategory] = useState(true);
+    const [price, setPrice] = useState([0, 600000]);
 
-    // ---
-    const [value1, setValue1] = useState([20, 37]);
+    const categories = [
+        "Electronics",
+        "Mobiles",
+        "Laptops",
+        "Shoes",
+        "Clothes",
+        "Headphones",
+        "Watches",
+        "Accessories",
+        "Home Appliances",
+        "Gaming"
+    ];
 
-    const handleChange1 = (event, newValue, activeThumb) => {
+    const handlePriceChange = (e, newValue, activeThumb) => {
+        if (!Array.isArray(newValue)) return;
+
         if (activeThumb === 0) {
-            setValue1([Math.min(newValue[0], value1[1] - minDistance), value1[1]]);
+            setPrice([Math.min(newValue[0], price[1] - minDistance), price[1]]);
         } else {
-            setValue1([value1[0], Math.max(newValue[1], value1[0] + minDistance)]);
+            setPrice([price[0], Math.max(newValue[1], price[0] + minDistance)]);
         }
     };
 
     return (
-        <div className='flex items-center flex-cols bg-white w-full justify-center'>
-            <List
-                sx={{ width: '90%', maxWidth: 360, bgcolor: 'background.paper' }}
-                component="nav"
-                aria-labelledby="nested-list-subheader"
-            >
-                {/* --start-- */}
-                <div>
-                    <div className='flex' >
-                        <ListItemText primary="Shop by Category" />
-                        {open ? <ExpandLess onClick={handleClick} /> : <ExpandMore onClick={handleClick} />}
-                    </div>
-                    <Collapse
-                        sx={{ width: '100%', display: 'flex', justifyContent: 'end', border: '2px solid red' }}
-                        in={open} timeout="auto" unmountOnExit>
-                        <List
-                            component="div" disablePadding>
-                            <FormGroup
-                                sx={{ width: '80%', border: '2px sold black' }}>
-                                <FormControlLabel control={<Checkbox defaultChecked />} label="Label" />
-                                <FormControlLabel required control={<Checkbox />} label="Required" />
-                            </FormGroup>
-                        </List>
-                    </Collapse >
-                </div>
-                {/* --end-- */}
+        <div className="bg-white w-full flex justify-center">
+            <List sx={{ width: '90%', maxWidth: 360 }}>
 
-                {/* --Start-- */}
+                {/* ================= CATEGORY FILTER ================= */}
                 <div>
+                    <div
+                        className="flex justify-between items-center cursor-pointer"
+                        onClick={() => setOpenCategory(!openCategory)}
+                    >
+                        <ListItemText primary="Shop by Category" />
+                        {openCategory ? <ExpandLess /> : <ExpandMore />}
+                    </div>
+
+                    <Collapse in={openCategory}>
+                        <FormGroup
+                            sx={{
+                                maxHeight: 200,
+                                overflowY: 'auto',
+                                pl: 1,
+                            }}
+                        >
+                            {categories.map((cat, i) => (
+                                <FormControlLabel
+                                    key={i}
+                                    control={<Checkbox />}
+                                    label={cat}
+                                />
+                            ))}
+                        </FormGroup>
+                    </Collapse>
+                </div>
+
+                {/* ================= PRICE FILTER ================= */}
+                <div className="mt-6">
                     <ListItemText primary="Filter by Price" />
 
-                    <Box
-                    // sx={{ width: 300 }}
-                    >
+                    <Box px={1}>
                         <Slider
-                            getAriaLabel={() => 'Minimum distance'}
-                            value={value1}
-                            onChange={handleChange1}
+                            value={price}
+                            min={0}
+                            max={600000}
+                            step={500}
+                            onChange={handlePriceChange}
                             valueLabelDisplay="auto"
-                            getAriaValueText={valuetext}
                             disableSwap
                         />
                     </Box>
-                    <div className='flex justify-between items-center'>
-                        <p>From<span className='font-[500] ml-2'>Rs: 0</span></p>
-                        <p>From<span className='font-[500] ml-2'>Rs: 60000</span></p>
+
+                    <div className="flex justify-between text-sm mt-1">
+                        <p>From <span className="font-[500]">Rs {price[0]}</span></p>
+                        <p>To <span className="font-[500]">Rs {price[1]}</span></p>
                     </div>
                 </div>
-                {/* --end-- */}
 
-                {/* --start-- */}
-                <div>
-                    <ListItemText primary="Filter By Rating" />
+                {/* ================= RATING FILTER ================= */}
+                <div className="mt-6">
+                    <ListItemText primary="Filter by Rating" />
+
                     <FormGroup>
-                        <FormControlLabel control={<Checkbox defaultChecked />} label="Label" />
-                        <FormControlLabel required control={<Checkbox />} label="Required" />
+                        {[5, 4, 3, 2, 1].map((rating) => (
+                            <FormControlLabel
+                                key={rating}
+                                control={<Checkbox />}
+                                label={
+                                    <div className="flex items-center gap-1">
+                                        {Array(rating).fill(0).map((_, i) => (
+                                            <StarIcon key={i} sx={{ color: '#facc15', fontSize: 18 }} />
+                                        ))}
+                                        <span className="text-sm">&nbsp; & Up</span>
+                                    </div>
+                                }
+                            />
+                        ))}
                     </FormGroup>
                 </div>
-                {/* --end-- */}
 
-            </List >
+            </List>
         </div>
-    )
+    );
 }
