@@ -45,13 +45,13 @@ export default function SideControllers() {
     };
 
     return (
-        <div className="bg-white w-full flex justify-center">
+        <div className="!bg-white w-full flex justify-center !h-[100%]">
             <List sx={{ width: '90%', maxWidth: 360 }}>
 
                 {/* ================= CATEGORY FILTER ================= */}
                 <div>
                     <div
-                        className="flex justify-between items-center cursor-pointer"
+                        className="flex cursor-pointer"
                         onClick={() => setOpenCategory(!openCategory)}
                     >
                         <ListItemText primary="Shop by Category" />
