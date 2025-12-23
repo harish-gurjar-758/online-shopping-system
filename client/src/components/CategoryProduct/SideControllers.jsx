@@ -44,51 +44,67 @@ export default function SideControllers() {
     };
 
     return (
-        <> <List
-            sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}
-            component="nav"
-            aria-labelledby="nested-list-subheader"
-        >
-            {/* --start-- */}
-            <ListItemButton onClick={handleClick}>
-                <ListItemText primary="Shop by Category" />
-                {open ? <ExpandLess /> : <ExpandMore />}
-            </ListItemButton>
-            <Collapse in={open} timeout="auto" unmountOnExit>
-                <List component="div" disablePadding>
+        <div className='flex items-center flex-cols bg-white w-full justify-center'>
+            <List
+                sx={{ width: '90%', maxWidth: 360, bgcolor: 'background.paper' }}
+                component="nav"
+                aria-labelledby="nested-list-subheader"
+            >
+                {/* --start-- */}
+                <div>
+                    <div className='flex' >
+                        <ListItemText primary="Shop by Category" />
+                        {open ? <ExpandLess onClick={handleClick} /> : <ExpandMore onClick={handleClick} />}
+                    </div>
+                    <Collapse
+                        sx={{ width: '100%', display: 'flex', justifyContent: 'end', border: '2px solid red' }}
+                        in={open} timeout="auto" unmountOnExit>
+                        <List
+                            component="div" disablePadding>
+                            <FormGroup
+                                sx={{ width: '80%', border: '2px sold black' }}>
+                                <FormControlLabel control={<Checkbox defaultChecked />} label="Label" />
+                                <FormControlLabel required control={<Checkbox />} label="Required" />
+                            </FormGroup>
+                        </List>
+                    </Collapse >
+                </div>
+                {/* --end-- */}
+
+                {/* --Start-- */}
+                <div>
+                    <ListItemText primary="Filter by Price" />
+
+                    <Box
+                    // sx={{ width: 300 }}
+                    >
+                        <Slider
+                            getAriaLabel={() => 'Minimum distance'}
+                            value={value1}
+                            onChange={handleChange1}
+                            valueLabelDisplay="auto"
+                            getAriaValueText={valuetext}
+                            disableSwap
+                        />
+                    </Box>
+                    <div className='flex justify-between items-center'>
+                        <p>From<span className='font-[500] ml-2'>Rs: 0</span></p>
+                        <p>From<span className='font-[500] ml-2'>Rs: 60000</span></p>
+                    </div>
+                </div>
+                {/* --end-- */}
+
+                {/* --start-- */}
+                <div>
+                    <ListItemText primary="Filter By Rating" />
                     <FormGroup>
                         <FormControlLabel control={<Checkbox defaultChecked />} label="Label" />
                         <FormControlLabel required control={<Checkbox />} label="Required" />
                     </FormGroup>
+                </div>
+                {/* --end-- */}
 
-                </List>
-            </Collapse >
-            {/* --end-- */}
-
-            {/* --Start-- */}
-            <ListItemText primary="Filter by Price" />
-
-            <Box sx={{ width: 300 }}>
-                <Slider
-                    getAriaLabel={() => 'Minimum distance'}
-                    value={value1}
-                    onChange={handleChange1}
-                    valueLabelDisplay="auto"
-                    getAriaValueText={valuetext}
-                    disableSwap
-                />
-            </Box>
-            {/* --end-- */}
-
-            {/* --start-- */}
-            <ListItemText primary="Drafts" />
-            <FormGroup>
-                <FormControlLabel control={<Checkbox defaultChecked />} label="Label" />
-                <FormControlLabel required control={<Checkbox />} label="Required" />
-            </FormGroup>
-
-            {/* --end-- */}
-        </List >
-        </>
+            </List >
+        </div>
     )
 }
