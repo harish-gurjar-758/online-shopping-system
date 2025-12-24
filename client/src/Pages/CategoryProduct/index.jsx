@@ -272,7 +272,7 @@ export default function Product() {
                                     </div>
                                     <div className='!absolute bottom-[15px] left-0 pl-3 pr-3 w-full'>
                                         <Button fullWidth variant="contained"
-                                            className='MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-colorPrimary btn-org addToCartBtn btn-border flex w-full btn-sm gap-2 css-uiq2rh'>
+                                            className='MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-colorPrimary btn-org addToCartBtn btn-border flex w-full btn-sm gap-2 css-uiq2rh !bg-primary !hover:!bg-[#fe6d6d]'>
                                             <LocalGroceryStoreIcon className='mr-2' />
                                             Add to cart
                                         </Button>
