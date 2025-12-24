@@ -65,6 +65,7 @@ export default function Product() {
             braned: "mdtp",
             title: "Jewellery trendy jewellery...",
             banner: "https://th.bing.com/th/id/R.4aea12329f76bd36486da9a7082833b7?rik=PdNoh71YSdvefw&riu=http%3a%2f%2fblog.southindiajewels.com%2fwp-content%2fuploads%2f2018%2f02%2fgold-jewellery-sets-for-marriage-19.jpg&ehk=q9Tj80NdD0xrUQ1pHn9Q4cEcXVsGprUyKWwiyyOIDnw%3d&risl=&pid=ImgRaw&r=0",
+            banner2: "https://i.pinimg.com/736x/ef/b9/81/efb981aa0e0c3cf75526481ac6a5c4c8.jpg",
             star: "4.5",
             oldPrice: "1200.00",
             newPrice: "1000.00",
@@ -278,7 +279,7 @@ export default function Product() {
                                         <div className='img h-[200px] overflow-hidden'>
                                             <img src={pro.banner} alt={pro.title}
                                                 className={view === "list" ? "w-[200px]" : "w-full h-[250px]"} />
-                                            <img src={pro.banner} alt={pro.title} className='w-full transition-all duration-700 absolute top-0 left-0 opacity-0 group-hover:opacity-100 group-hover:scale-105' />
+                                            <img src={pro.banner2} alt={pro.title} className='w-full transition-all duration-700 absolute top-0 left-0 opacity-0 group-hover:opacity-100 group-hover:scale-105' />
                                         </div>
                                     </Link>
                                     {activeSizeBox === pro.id && (
