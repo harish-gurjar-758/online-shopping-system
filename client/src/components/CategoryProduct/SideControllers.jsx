@@ -14,14 +14,12 @@ import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import StarIcon from '@mui/icons-material/Star';
 
-const minDistance = 500;
-
-export default function SideControllers() {
+export default function SideControllers({ filters, setFilters }) {
 
     const [openCategory, setOpenCategory] = useState(true);
-    const [price, setPrice] = useState([0, 600000]);
 
     const categories = [
+        "jewellery",
         "Electronics",
         "Mobiles",
         "Laptops",
@@ -34,24 +32,40 @@ export default function SideControllers() {
         "Gaming"
     ];
 
-    const handlePriceChange = (e, newValue, activeThumb) => {
-        if (!Array.isArray(newValue)) return;
+    /* ✅ Category */
+    const handleCategoryChange = (cat) => {
+        setFilters(prev => ({
+            ...prev,
+            categories: prev.categories.includes(cat)
+                ? prev.categories.filter(c => c !== cat)
+                : [...prev.categories, cat]
+        }));
+    };
 
-        if (activeThumb === 0) {
-            setPrice([Math.min(newValue[0], price[1] - minDistance), price[1]]);
-        } else {
-            setPrice([price[0], Math.max(newValue[1], price[0] + minDistance)]);
-        }
+    /* ✅ Price */
+    const handlePriceChange = (e, newValue) => {
+        setFilters(prev => ({
+            ...prev,
+            price: newValue
+        }));
+    };
+
+    /* ✅ Rating */
+    const handleRatingChange = (rating) => {
+        setFilters(prev => ({
+            ...prev,
+            rating: prev.rating === rating ? null : rating
+        }));
     };
 
     return (
-        <div className=" className='sidebar py-3  lg:py-5 static lg:sticky top-[130px] z-[50] pr-0 lg:pr-5'">
-            <List sx={{ width: '90%', maxWidth: 360 }}>
+        <div className="sidebar py-3 lg:py-5 sticky top-[130px] z-[50] pr-5">
+            <List sx={{ width: '100%', maxWidth: 360 }}>
 
-                {/* ================= CATEGORY FILTER ================= */}
+                {/* ================= CATEGORY ================= */}
                 <div>
                     <div
-                        className="flex cursor-pointer"
+                        className="flex justify-between cursor-pointer"
                         onClick={() => setOpenCategory(!openCategory)}
                     >
                         <ListItemText primary="Shop by Category" />
@@ -59,17 +73,16 @@ export default function SideControllers() {
                     </div>
 
                     <Collapse in={openCategory}>
-                        <FormGroup
-                            sx={{
-                                maxHeight: 200,
-                                overflowY: 'auto',
-                                pl: 1,
-                            }}
-                        >
+                        <FormGroup sx={{ maxHeight: 200, overflowY: 'auto', pl: 1 }}>
                             {categories.map((cat, i) => (
                                 <FormControlLabel
                                     key={i}
-                                    control={<Checkbox />}
+                                    control={
+                                        <Checkbox
+                                            checked={filters.categories.includes(cat)}
+                                            onChange={() => handleCategoryChange(cat)}
+                                        />
+                                    }
                                     label={cat}
                                 />
                             ))}
@@ -77,29 +90,28 @@ export default function SideControllers() {
                     </Collapse>
                 </div>
 
-                {/* ================= PRICE FILTER ================= */}
+                {/* ================= PRICE ================= */}
                 <div className="mt-6">
                     <ListItemText primary="Filter by Price" />
 
                     <Box px={1}>
                         <Slider
-                            value={price}
+                            value={filters.price}
                             min={0}
-                            max={600000}
-                            step={500}
+                            max={100000}
+                            step={100}
                             onChange={handlePriceChange}
                             valueLabelDisplay="auto"
-                            disableSwap
                         />
                     </Box>
 
                     <div className="flex justify-between text-sm mt-1">
-                        <p>From <span className="font-[500]">Rs {price[0]}</span></p>
-                        <p>To <span className="font-[500]">Rs {price[1]}</span></p>
+                        <p>From <b>₹{filters.price[0]}</b></p>
+                        <p>To <b>₹{filters.price[1]}</b></p>
                     </div>
                 </div>
 
-                {/* ================= RATING FILTER ================= */}
+                {/* ================= RATING ================= */}
                 <div className="mt-6">
                     <ListItemText primary="Filter by Rating" />
 
@@ -107,13 +119,21 @@ export default function SideControllers() {
                         {[5, 4, 3, 2, 1].map((rating) => (
                             <FormControlLabel
                                 key={rating}
-                                control={<Checkbox />}
+                                control={
+                                    <Checkbox
+                                        checked={filters.rating === rating}
+                                        onChange={() => handleRatingChange(rating)}
+                                    />
+                                }
                                 label={
                                     <div className="flex items-center gap-1">
                                         {Array(rating).fill(0).map((_, i) => (
-                                            <StarIcon key={i} sx={{ color: '#facc15', fontSize: 18 }} />
+                                            <StarIcon
+                                                key={i}
+                                                sx={{ color: '#facc15', fontSize: 18 }}
+                                            />
                                         ))}
-                                        <span className="text-sm">&nbsp; & Up</span>
+                                        <span className="text-sm">& Up</span>
                                     </div>
                                 }
                             />
