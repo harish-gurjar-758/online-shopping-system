@@ -40,6 +40,7 @@ export default function Product() {
         setSelectedSize(prev => ({ ...prev, [productId]: size }));
         setQuantity(prev => ({ ...prev, [productId]: 1 }));
         setActiveSizeBox(null); // hide size box
+        setActiveSizeBox(null)
     };
 
     const handleCloseSizeBox = () => {
