@@ -11,6 +11,8 @@ import { Link } from 'react-router-dom';
 import { IoGrid } from "react-icons/io5";
 import { CiCircleList } from "react-icons/ci";
 import SortByFadeMenu from '../../components/CategoryProduct/SortByFadeMenu';
+import ProductDetailedSection from '../../components/Home/ProductDetailed';
+import { IoMdClose } from 'react-icons/io';
 
 export default function Product() {
 
@@ -22,6 +24,39 @@ export default function Product() {
         price: [0, 600000],
         rating: null,
     });
+
+    const [openDetails, setOpenDetails] = useState(false);
+
+    // ----
+    const [activeSizeBox, setActiveSizeBox] = useState(null); // productId
+    const [selectedSize, setSelectedSize] = useState({});
+    const [quantity, setQuantity] = useState({});
+
+    const handleAddToCartClick = (productId) => {
+        setActiveSizeBox(productId);
+    };
+
+    const handleSizeSelect = (productId, size) => {
+        setSelectedSize(prev => ({ ...prev, [productId]: size }));
+        setQuantity(prev => ({ ...prev, [productId]: 1 }));
+        setActiveSizeBox(null); // hide size box
+    };
+
+    const handleCloseSizeBox = () => {
+        setActiveSizeBox(null);
+    };
+
+    const increaseQty = (id) => {
+        setQuantity(prev => ({ ...prev, [id]: prev[id] + 1 }));
+    };
+
+    const decreaseQty = (id) => {
+        setQuantity(prev => ({
+            ...prev,
+            [id]: prev[id] > 1 ? prev[id] - 1 : 1
+        }));
+    };
+
 
     const product = [
         {
@@ -189,6 +224,14 @@ export default function Product() {
         );
     };
 
+
+    // ------
+    const handleShowDetails = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setOpenDetails(true);
+    }
+
     return (
         <div className='bg-white'>
             <div className='container flex gap-3'>
@@ -238,18 +281,34 @@ export default function Product() {
                                             <img src={pro.banner} alt={pro.title} className='w-full transition-all duration-700 absolute top-0 left-0 opacity-0 group-hover:opacity-100 group-hover:scale-105' />
                                         </div>
                                     </Link>
-                                    <div className='flex items-center justify-center absolute top-0 left-0 w-full h-full bg-[rgba(0,0,0,0.7)] z-[60] p-3 gap-2'>
-                                        <Button className='MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary !absolute top-[10px] right-[10px] !min-w-[30px] !min-h-[30px] !w-[30px] !h-[30px] !rounded-full !bg-[rgba(255,255,255,1)] text-black css-iyey26'>
-                                            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" class=" text-black z-[90] text-[25px]" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h24v24H0z"></path><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
-                                        </Button>
-                                        <span class="flex items-center justify-center p-1 px-2 bg-[rgba(255,555,255,0.8)] max-w-[35px] h-[25px] rounded-sm cursor-pointer hover:bg-white false">S</span>
-                                        <span class="flex items-center justify-center p-1 px-2 bg-[rgba(255,555,255,0.8)] max-w-[35px] h-[25px] rounded-sm cursor-pointer hover:bg-white false">M</span>
-                                    </div>
+                                    {activeSizeBox === pro.id && (
+                                        <div className='flex items-center justify-center absolute top-0 left-0 w-full h-full bg-[rgba(0,0,0,0.7)] z-[60] p-3 gap-2'>
+                                            <Button
+                                                onClick={handleCloseSizeBox}
+                                                className='MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary !absolute top-[10px] right-[10px] !min-w-[30px] !min-h-[30px] !w-[30px] !h-[30px] !rounded-full !bg-[rgba(255,255,255,1)] text-black css-iyey26'
+                                            >
+                                                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" class=" text-black z-[90] text-[25px]" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h24v24H0z"></path><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+                                            </Button>
+
+                                            {/* Sizes */}
+                                            {["S", "M", "L"].map(size => (
+                                                <span
+                                                    key={size}
+                                                    onClick={() => handleSizeSelect(pro.id, size)}
+                                                    className="flex items-center justify-center p-1 px-2 bg-[rgba(255,555,255,0.8)] max-w-[35px] h-[25px] rounded-sm cursor-pointer hover:bg-white false"
+                                                >
+                                                    {size}
+                                                </span>
+                                            ))}
+                                        </div>
+                                    )}
                                     <span className='discount flex items-center absolute top-[10px] left-[10px] z-50 bg-primary text-white rounded-lg p-1 text-[12px] font-[500]'>8%</span>
                                     <div className='actions absolute top-[-20px] right-[5px] z-50 flex items-center gap-2 flex-col w-[50px] transition-all duration-300 group-hover:top-[15px] opacity-0 group-hover:opacity-100'>
-                                        <button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary !w-[35px] !h-[35px] !min-w-[35px] !rounded-full !bg-white text-black hover:!bg-primary hover:text-white group css-iyey26" tabindex="0" type="button"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" class="text-[18px] !text-black group-hover:text-white hover:!text-white" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h24v24H0z"></path><path d="m15 3 2.3 2.3-2.89 2.87 1.42 1.42L18.7 6.7 21 9V3h-6zM3 9l2.3-2.3 2.87 2.89 1.42-1.42L6.7 5.3 9 3H3v6zm6 12-2.3-2.3 2.89-2.87-1.42-1.42L5.3 17.3 3 15v6h6zm12-6-2.3 2.3-2.87-2.89-1.42 1.42 2.89 2.87L15 21h6v-6z"></path></svg></button>
-                                        <button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary !w-[35px] !h-[35px] !min-w-[35px] !rounded-full !bg-white text-black hover:!bg-primary hover:text-white group css-iyey26" tabindex="0" type="button"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" class="text-[18px] !text-black group-hover:text-white hover:!text-white" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="m304 160-64-64 64-64m-97 320 64 64-64 64"></path><circle cx="112" cy="96" r="48" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"></circle><circle cx="400" cy="416" r="48" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"></circle><path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M256 96h84a60 60 0 0 1 60 60v212m-145 48h-84a60 60 0 0 1-60-60V144"></path></svg><span class="MuiTouchRipple-root css-4mb1j7"></span></button>
-                                        <button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary !w-[35px] !h-[35px] !min-w-[35px] !rounded-full !bg-white text-black hover:!bg-primary hover:text-white group css-iyey26" tabindex="0" type="button"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" class="text-[18px] !text-black group-hover:text-white hover:!text-white" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M458.4 64.3C400.6 15.7 311.3 23 256 79.3 200.7 23 111.4 15.6 53.6 64.3-21.6 127.6-10.6 230.8 43 285.5l175.4 178.7c10 10.2 23.4 15.9 37.6 15.9 14.3 0 27.6-5.6 37.6-15.8L469 285.6c53.5-54.7 64.7-157.9-10.6-221.3zm-23.6 187.5L259.4 430.5c-2.4 2.4-4.4 2.4-6.8 0L77.2 251.8c-36.5-37.2-43.9-107.6 7.3-150.7 38.9-32.7 98.9-27.8 136.5 10.5l35 35.7 35-35.7c37.8-38.5 97.8-43.2 136.5-10.6 51.1 43.1 43.5 113.9 7.3 150.8z"></path></svg></button>
+                                        <button
+                                            onClick={handleShowDetails}
+                                            className="flex items-center justify-center MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary !w-[35px] !h-[35px] !min-w-[35px] !rounded-full !bg-white text-black hover:!bg-primary hover:text-white group css-iyey26" tabindex="0" type="button"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" class="text-[18px] !text-black group-hover:text-white hover:!text-white" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h24v24H0z"></path><path d="m15 3 2.3 2.3-2.89 2.87 1.42 1.42L18.7 6.7 21 9V3h-6zM3 9l2.3-2.3 2.87 2.89 1.42-1.42L6.7 5.3 9 3H3v6zm6 12-2.3-2.3 2.89-2.87-1.42-1.42L5.3 17.3 3 15v6h6zm12-6-2.3 2.3-2.87-2.89-1.42 1.42 2.89 2.87L15 21h6v-6z"></path></svg></button>
+                                        <button class="flex items-center justify-center MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary !w-[35px] !h-[35px] !min-w-[35px] !rounded-full !bg-white text-black hover:!bg-primary hover:text-white group css-iyey26" tabindex="0" type="button"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" class="text-[18px] !text-black group-hover:text-white hover:!text-white" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="m304 160-64-64 64-64m-97 320 64 64-64 64"></path><circle cx="112" cy="96" r="48" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"></circle><circle cx="400" cy="416" r="48" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"></circle><path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M256 96h84a60 60 0 0 1 60 60v212m-145 48h-84a60 60 0 0 1-60-60V144"></path></svg><span class="MuiTouchRipple-root css-4mb1j7"></span></button>
+                                        <button class="flex items-center justify-center MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary !w-[35px] !h-[35px] !min-w-[35px] !rounded-full !bg-white text-black hover:!bg-primary hover:text-white group css-iyey26" tabindex="0" type="button"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" class="text-[18px] !text-black group-hover:text-white hover:!text-white" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M458.4 64.3C400.6 15.7 311.3 23 256 79.3 200.7 23 111.4 15.6 53.6 64.3-21.6 127.6-10.6 230.8 43 285.5l175.4 178.7c10 10.2 23.4 15.9 37.6 15.9 14.3 0 27.6-5.6 37.6-15.8L469 285.6c53.5-54.7 64.7-157.9-10.6-221.3zm-23.6 187.5L259.4 430.5c-2.4 2.4-4.4 2.4-6.8 0L77.2 251.8c-36.5-37.2-43.9-107.6 7.3-150.7 38.9-32.7 98.9-27.8 136.5 10.5l35 35.7 35-35.7c37.8-38.5 97.8-43.2 136.5-10.6 51.1 43.1 43.5 113.9 7.3 150.8z"></path></svg></button>
                                     </div>
                                 </div>
                                 <div className='info p-3 py-5 relative pb-[50px] h-[190px]'>
@@ -271,11 +330,39 @@ export default function Product() {
                                         </p>
                                     </div>
                                     <div className='!absolute bottom-[15px] left-0 pl-3 pr-3 w-full'>
-                                        <Button fullWidth variant="contained"
-                                            className='MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-colorPrimary btn-org addToCartBtn btn-border flex w-full btn-sm gap-2 css-uiq2rh !bg-primary !hover:!bg-[#fe6d6d]'>
-                                            <LocalGroceryStoreIcon className='mr-2' />
-                                            Add to cart
-                                        </Button>
+                                        {!quantity[pro.id] ? (
+                                            /* DEFAULT ADD TO CART */
+
+                                            <Button
+                                                fullWidth
+                                                variant="contained"
+                                                onClick={() => handleAddToCartClick(pro.id)}
+                                                className='MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-colorPrimary btn-org addToCartBtn btn-border flex w-full btn-sm gap-2 css-uiq2rh !bg-primary !hover:!bg-[#fe6d6d]'>
+                                                <LocalGroceryStoreIcon className='mr-2' />
+                                                Add to cart
+                                            </Button>
+                                        ) : (
+                                            /* QUANTITY COUNTER */
+                                            <div className="flex items-center justify-between border rounded">
+                                                <button
+                                                    onClick={() => decreaseQty(pro.id)}
+                                                    className="px-3 py-2 text-lg"
+                                                >
+                                                    −
+                                                </button>
+
+                                                <span className="font-semibold">
+                                                    {quantity[pro.id]}
+                                                </span>
+
+                                                <button
+                                                    onClick={() => increaseQty(pro.id)}
+                                                    className="px-3 py-2 text-lg"
+                                                >
+                                                    +
+                                                </button>
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
                             </div>
@@ -284,6 +371,20 @@ export default function Product() {
 
                 </div>
             </div>
+            {/* MODAL */}
+            {openDetails && (
+                <div className="fixed inset-0 z-[10000] bg-black/50 flex items-center justify-center">
+                    <div className="bg-white p-5 rounded relative w-[80%]">
+                        <button
+                            className="absolute top-3 right-3 text-xl"
+                            onClick={() => setOpenDetails(false)}
+                        >
+                            <IoMdClose />
+                        </button>
+                        <ProductDetailedSection />
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
