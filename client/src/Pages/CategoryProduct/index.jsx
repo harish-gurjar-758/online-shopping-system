@@ -11,6 +11,9 @@ import { FaRegHeart } from "react-icons/fa";
 import { MdOutlineZoomOutMap } from "react-icons/md";
 import { IoGitCompareOutline } from "react-icons/io5";
 
+import { CiCircleList } from "react-icons/ci";
+import { IoGrid } from "react-icons/io5";
+
 
 export default function Product() {
     const [openDetails, setOpenDetails] = useState(false);
@@ -154,86 +157,104 @@ export default function Product() {
         setOpenDetails(true);
     }
     return (
-        <div className='w-full flex items-center'>
-            <div className='w-[20%] h-[100%] bg-white'>
-                <SideControllers />
-            </div>
-            <div className=' container'>
-                <div className='w-full bg-slate-300 rounded h-[40px]'></div>
-                <div className='w-full flex items-center gap-2 justify-center flex-wrap'>
-                    {product.map((pro) => (
-                        <div key={pro.id}
-                            className='!card mt-3 mb-3 ml-2 !w-[250px] border border-grey shadow-[1px_0_10px_#f5f0f0] rounded'>
-
-                            <Link
-                                to={`/product-detailed/${pro.id}`}
-                                className='border-l-pink-950'
-                            >
-                                <div className="!img w-full h-[250px] overflow-hidden rounded-tl rounded-tr relative">
-                                    <p className='w-[30px] h-[30px] absolute top-3 left-3 text-center flex items-center justify-center rounded-[100%] p-4 text-[14px] bg-[#ff5252] text-white'>8%</p>
-
-                                    <div className='absolute right-3 top-4 flex flex-col gap-4' >
-                                        {/* <div className='actions absolute top-[-20px] right-[5px] z-50 flex items-center gap-2 flex-col w-[50px] transition-all duration-300 group-hover:top-[15px] opacity-0 group-hover:opacity-100' > */}
-                                        <div
-                                            className=' bg-white rounded-[100%] text-[20px] p-2 text-black'
-                                            onClick={handleShowDetails}
-                                        >
-                                            <MdOutlineZoomOutMap />
-                                        </div>
-                                        <div className=' bg-white rounded-[100%] text-[20px] p-2 text-black' >
-                                            <IoGitCompareOutline />
-                                        </div>
-                                        <div className=' bg-white rounded-[100%] text-[20px] p-2 text-black' >
-                                            <FaRegHeart />
-                                        </div>
-
-                                    </div>
-                                    <img
-                                        src={pro.banner} alt={pro.title}
-                                        className='w-full !h-[300px]'
-                                    />
-                                </div>
-
-                                <div className='w-[250px] flex items-start flex-col gap-3 px-2 py-2 relative'>
-                                    <p className='text-[13px] font-[500] text-stone-500'>
-                                        {pro.braned}{pro.id}
-                                    </p>
-
-                                    <p className='text-[13px] font-[500]'>
-                                        {pro.title}
-                                    </p>
-
-                                    {/* ⭐ Dynamic Stars */}
-                                    <div className='flex'>
-                                        {renderStars(pro.star)}
-                                    </div>
-
-                                    {/* Price Section */}
-                                    <div className='w-full flex justify-between'>
-                                        <p className='line-through text-stone-400 text-[15px] font-[500]'>
-                                            <CurrencyRupeeIcon className='!text-[15px] !font-[500]' />
-                                            {pro.oldPrice}
-                                        </p>
-
-                                        <p className='text-[#ff5252] text-[15px] font-[500]'>
-                                            <CurrencyRupeeIcon className='!text-[15px] !font-[500]' />
-                                            {pro.newPrice}
-                                        </p>
-                                    </div>
-
-                                    {/* Add to Cart */}
-                                    <Button
-                                        fullWidth
-                                        variant="contained"
-                                        className="!mt-3 !w-full !bg-[#ff5252] hover:!bg-[#fe6d6d] z-10 absolute"
-                                    >
-                                        <LocalGroceryStoreIcon className='mr-2' />
-                                        Add to cart
-                                    </Button>
-                                </div>
-                            </Link>
+        <div className='bg-white'>
+            <div className='container flex gap-3'>
+                <div className='sidebarWrapper fixed -bottom-[100%] left-0 w-fulllg:h-full lg:static lg:w-[20%] bg-white z-[102] lg:z-[100] p-3 lg:p-0  transition-all lg:opacity-100 opacity-0 '>
+                    <SideControllers />
+                </div>
+                <div className='rightContent w-full lg:w-[80%] py-3'>
+                    {/* --Start-- */}
+                    <div className='!bg-[#f1f1f1] p-2 w-full mb-4 rounded-md flex items-center justify-between sticky top-[135px] z-[99]'>
+                        <div className='col1 flex items-center itemViewActions'>
+                            <CiCircleList />
+                            <IoGrid />
+                            <span class="text-[14px] hidden sm:block md:block lg:block font-[500] pl-3 text-[rgba(0,0,0,0.7)]">There are 22  products.</span>
                         </div>
-                    ))}
+                        <div className='col2 ml-auto flex items-center justify-end gap-3 pr-4'>
+                            <span class="text-[14px] font-[500] pl-3 text-[rgba(0,0,0,0.7)]">Sort By</span>
+                            <Button>Name a to z</Button>
+                        </div>
+                    </div>
+                    {/* --End-- */}
+
+                    {/* ----- */}
+                    <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4'>
+                        {product.map((pro) => (
+                            <div key={pro.id}
+                                // className='!card mt-3 mb-3 ml-2 !w-[250px] border border-grey shadow-[1px_0_10px_#f5f0f0] rounded'
+                                className='productItem shadow-lg rounded-md overflow-hidden border-1 border-[rgba(0,0,0,0.1)]'
+                            >
+
+                                <Link
+                                    to={`/product-detailed/${pro.id}`}
+                                    className='border-l-pink-950'
+                                >
+                                    <div className="!img w-full h-[250px] overflow-hidden rounded-tl rounded-tr relative">
+                                        <p className='w-[30px] h-[30px] absolute top-3 left-3 text-center flex items-center justify-center rounded-[100%] p-4 text-[14px] bg-[#ff5252] text-white'>8%</p>
+
+                                        <div className='absolute right-3 top-4 flex flex-col gap-4' >
+                                            {/* <div className='actions absolute top-[-20px] right-[5px] z-50 flex items-center gap-2 flex-col w-[50px] transition-all duration-300 group-hover:top-[15px] opacity-0 group-hover:opacity-100' > */}
+                                            <div
+                                                className=' bg-white rounded-[100%] text-[20px] p-2 text-black'
+                                                onClick={handleShowDetails}
+                                            >
+                                                <MdOutlineZoomOutMap />
+                                            </div>
+                                            <div className=' bg-white rounded-[100%] text-[20px] p-2 text-black' >
+                                                <IoGitCompareOutline />
+                                            </div>
+                                            <div className=' bg-white rounded-[100%] text-[20px] p-2 text-black' >
+                                                <FaRegHeart />
+                                            </div>
+
+                                        </div>
+                                        <img
+                                            src={pro.banner} alt={pro.title}
+                                            className='w-full !h-[300px]'
+                                        />
+                                    </div>
+
+                                    <div className='w-[250px] flex items-start flex-col gap-3 px-2 py-2 relative'>
+                                        <p className='text-[13px] font-[500] text-stone-500'>
+                                            {pro.braned}{pro.id}
+                                        </p>
+
+                                        <p className='text-[13px] font-[500]'>
+                                            {pro.title}
+                                        </p>
+
+                                        {/* ⭐ Dynamic Stars */}
+                                        <div className='flex'>
+                                            {renderStars(pro.star)}
+                                        </div>
+
+                                        {/* Price Section */}
+                                        <div className='w-full flex justify-between'>
+                                            <p className='line-through text-stone-400 text-[15px] font-[500]'>
+                                                <CurrencyRupeeIcon className='!text-[15px] !font-[500]' />
+                                                {pro.oldPrice}
+                                            </p>
+
+                                            <p className='text-[#ff5252] text-[15px] font-[500]'>
+                                                <CurrencyRupeeIcon className='!text-[15px] !font-[500]' />
+                                                {pro.newPrice}
+                                            </p>
+                                        </div>
+
+                                        {/* Add to Cart */}
+                                        <Button
+                                            fullWidth
+                                            variant="contained"
+                                            className="!mt-3 !w-full !bg-[#ff5252] hover:!bg-[#fe6d6d] z-10 absolute"
+                                        >
+                                            <LocalGroceryStoreIcon className='mr-2' />
+                                            Add to cart
+                                        </Button>
+                                    </div>
+                                </Link>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
         </div>

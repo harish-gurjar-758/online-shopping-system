@@ -45,7 +45,7 @@ export default function SideControllers() {
     };
 
     return (
-        <div className="!bg-white w-full flex justify-center !h-[100%]">
+        <div className=" className='sidebar py-3  lg:py-5 static lg:sticky top-[130px] z-[50] pr-0 lg:pr-5'">
             <List sx={{ width: '90%', maxWidth: 360 }}>
 
                 {/* ================= CATEGORY FILTER ================= */}
