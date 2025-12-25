@@ -30,7 +30,7 @@ export default function Login() {
           <Button
             variant="outlined"
             sx={{ textTransform: 'none', color: "black", display: "flex", gap: "8px", fontWeight: "500" }}
-          >Signin with Google <FcGoogle className='text-[20px]' /></Button>
+          >Sign In with Google <FcGoogle className='text-[20px]' /></Button>
         </div>
         <div className='w-full flex items-center justify-center gap-3'>
           <span class="flex items-center w-[100px] h-[1px] bg-[rgba(0,0,0,0.2)]"></span>
