@@ -1,11 +1,13 @@
+import { BrowserRouter } from "react-router-dom";
+import Login from "./Pages/Login";
 
 function App() {
-
   return (
-    <div className="text-3xl font-bold underline">
-      Admin
-    </div>
-  )
+    <BrowserRouter>
+      <Login />
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
+
