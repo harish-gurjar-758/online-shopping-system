@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import { NavLink } from 'react-router-dom';
 import WebLogo from '../../../public/logo.png';
@@ -8,11 +8,16 @@ import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import ProfilePlaceholder from '../../assets/profile-placeholder.jpg'
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { RiMenu2Fill } from "react-icons/ri";
+import SideMenuPanel from './SideMenuPanel';
 
 
 
 export default function NavBar() {
-    // const 
+    const [isOpenSideMenuPanel, setIsOpenSideMenuPanel] = useState(false);
+    const openSideMenuPanel = () => {
+        setIsOpenSideMenuPanel(true);
+    }
+
     return (
         <div className='w-full'>
             <div className='w-full static lg:fixed top-0 left-0 px-4 py-3 flex items-center justify-center sm:justify-between z-50'>
@@ -20,7 +25,10 @@ export default function NavBar() {
                     <NavLink to="/">
                         <img src={WebLogo} alt="web logo" className='w-[200px]' />
                     </NavLink>
-                    <div className='cursor-pointer bg-[#e8e8e8] p-2 rounded'>
+                    <div
+                        className='cursor-pointer bg-[#e8e8e8] p-2 rounded'
+                        onClick={openSideMenuPanel}
+                    >
                         <RiMenu2Fill />
                     </div>
                 </div>
@@ -69,11 +77,12 @@ export default function NavBar() {
             </div>
 
             {/* --- side menu --- */}
-            <div>
-                this is side
-
-                
-                           </div>
+            {/* --Start-- */}
+            <SideMenuPanel
+                isOpenSideMenuPanel={isOpenSideMenuPanel}
+                setIsOpenSideMenuPanel={setIsOpenSideMenuPanel}
+            />
+            {/* --End-- */}
         </div>
     );
 }
