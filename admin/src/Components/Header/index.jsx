@@ -20,7 +20,7 @@ export default function NavBar() {
 
     return (
         <div className='w-full'>
-            <div className='w-full static lg:fixed top-0 left-0 px-4 py-3 flex items-center justify-center sm:justify-between z-50'>
+            <div className='w-full static lg:fixed top-0 left-0 px-4 py-3 flex items-center justify-center sm:justify-between z-50 bg-white'>
                 <div className='flex items-center gap-5'>
                     <NavLink to="/">
                         <img src={WebLogo} alt="web logo" className='w-[200px]' />
