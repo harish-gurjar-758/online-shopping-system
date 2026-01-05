@@ -9,6 +9,7 @@ import ProfilePlaceholder from '../../assets/profile-placeholder.jpg'
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { RiMenu2Fill } from "react-icons/ri";
 import SideMenuPanel from './SideMenuPanel';
+import SideMenu from './SideMenu';
 
 
 
@@ -78,7 +79,11 @@ export default function NavBar() {
 
             {/* --- side menu --- */}
             {/* --Start-- */}
-            <SideMenuPanel
+            {/* <SideMenuPanel
+                isOpenSideMenuPanel={isOpenSideMenuPanel}
+                setIsOpenSideMenuPanel={setIsOpenSideMenuPanel}
+            /> */}
+            <SideMenu
                 isOpenSideMenuPanel={isOpenSideMenuPanel}
                 setIsOpenSideMenuPanel={setIsOpenSideMenuPanel}
             />
