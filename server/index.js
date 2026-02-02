@@ -4,7 +4,8 @@ import cors from 'cors';
 
 // Custom modules
 import connectDB from './src/db/connectDB.js';
-import authRoutes from './src/routes/userAuth.routes.js'
+import authRoutes from './src/routes/userAuth.routes.js';
+import productRoutes from './src/routes/product.routes.js';
 
 // Load environment variables
 dotenv.config();
@@ -22,7 +23,8 @@ connectDB();
 
 // API Routes
 app.use('/api', authRoutes);
- 
+app.use('/api', productRoutes);
+
 // Server Listen
 app.listen(PORT, () => {
     console.log(`Server running at : http://localhost:${PORT}`);
