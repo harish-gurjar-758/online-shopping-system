@@ -1,4 +1,4 @@
-import Product from "../models/Product.js";
+import Product from "../modules/product.module.js";
 
 /**
  * CREATE PRODUCT (with multiple banners)
