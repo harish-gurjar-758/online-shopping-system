@@ -16,7 +16,7 @@ function App() {
 
 
         {/* Product category */}
-        <Route path="/add-product-category" element={<AddNewProductCategory />} />
+        <Route path="/admin/add-product-category" element={<AddNewProductCategory />} />
 
         
       </Routes>
