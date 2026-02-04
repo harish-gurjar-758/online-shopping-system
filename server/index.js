@@ -6,6 +6,7 @@ import cors from 'cors';
 import connectDB from './src/db/connectDB.js';
 import authRoutes from './src/routes/userAuth.routes.js';
 import productRoutes from './src/routes/product.routes.js';
+import productCategoryRoutes from './src/routes/productCategory.routes.js';
 
 // Load environment variables
 dotenv.config();
@@ -24,6 +25,7 @@ connectDB();
 // API Routes
 app.use('/api', authRoutes);
 app.use('/api', productRoutes);
+app.use('/api', productCategoryRoutes);
 
 // Server Listen
 app.listen(PORT, () => {

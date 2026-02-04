@@ -1,4 +1,4 @@
-import ProductCategory from "../modules/productCategory.module";
+import ProductCategory from "../modules/productCategory.module.js";
 
 // Create Product category
 export const createProductCategory = async (req, res) => {
