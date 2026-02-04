@@ -2,8 +2,15 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./Pages/Login";
 import SignUp from "./Pages/SignUp";
 import NavBar from "./Components/Header";
+
+// ----
 import Dashboard from "./Pages/Dashboard";
+
+// ---
 import AddNewProductCategory from "./Pages/ProductCategory/AddNewProductCategory";
+
+// ---
+import AddNewProduct from "./Pages/Products/AddNewProduct";
 
 function App() {
   return (
@@ -18,7 +25,9 @@ function App() {
         {/* Product category */}
         <Route path="/admin/add-product-category" element={<AddNewProductCategory />} />
 
-        
+        {/* Product */}
+        <Route path="/admin/add-product" element={<AddNewProduct />} />
+
       </Routes>
     </BrowserRouter>
   );

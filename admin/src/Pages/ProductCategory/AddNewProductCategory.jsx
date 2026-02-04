@@ -45,7 +45,7 @@ export default function AddNewProductCategory() {
                                 placeholder='Product Category Description'
                             />
                         </div>
-                        <Button className='w-full' variant="contained">Add Product Category</Button>
+                        <Button className='w-fit' variant="contained">Add Product Category</Button>
                     </form>
                     <div className='w-[49%] h-full px-3'>
                         <div className='bg-gray-700 !w-[30px], h-[40px]'>
