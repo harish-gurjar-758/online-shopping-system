@@ -25,64 +25,132 @@ export default function SideMenu({ isOpenSideMenuPanel, setIsOpenSideMenuPanel }
             id: "02CT",
             navTitle: "Home Slides",
             icon: FaImage,
+            route: "/",
             subNav: [
-                { id: "02CTsubCatFs01", name: "Home Banner List" },
-                { id: "02CTsubCatFs02", name: "Add Home Banner List" },
+                {
+                    id: "02CTsubCatFs01",
+                    name: "Home Banner List",
+                    route: "/"
+                },
+                {
+                    id: "02CTsubCatFs02",
+                    name: "Add Home Banner List",
+                    route: "/"
+                },
             ],
         },
         {
             id: "03CT",
             navTitle: "Category",
             icon: LuLayoutDashboard,
+            route: "/",
             subNav: [
-                { id: "03CTsubCatFs01", name: "Category List" },
-                { id: "03CTsubCatFs02", name: "Add A Category" },
-                { id: "03CTsubCatFs03", name: "Sub Category List" },
-                { id: "03CTsubCatFs04", name: "Add A Sub Category List" },
+                {
+                    id: "03CTsubCatFs01",
+                    name: "Category List",
+                    route: "/product-category-list"
+                },
+                {
+                    id: "03CTsubCatFs02",
+                    name: "Add A Category",
+                    route: "/add-product-category"
+                },
+                {
+                    id: "03CTsubCatFs03",
+                    name: "Sub Category List",
+                    route: "/"
+                },
+                {
+                    id: "03CTsubCatFs04",
+                    name: "Add A Sub Category List",
+                    route: "/"
+                },
             ],
         },
         {
             id: "04CT",
             navTitle: "Product",
             icon: TbBrandProducthunt,
+            route: "/",
             subNav: [
-                { id: "04CTsubCatFs01", name: "Product List" },
-                { id: "04CTsubCatFs02", name: "Product Upload" },
-                { id: "04CTsubCatFs03", name: "Add Product RAMS" },
-                { id: "04CTsubCatFs04", name: "Add Product WEIGHT" },
-                { id: "04CTsubCatFs05", name: "Add Product SIZE" },
+                {
+                    id: "04CTsubCatFs01",
+                    name: "Product List",
+                    route: "/"
+                },
+                {
+                    id: "04CTsubCatFs02",
+                    name: "Product Upload",
+                    route: "/"
+                },
+                {
+                    id: "04CTsubCatFs03",
+                    name: "Add Product RAMS",
+                    route: "/"
+                },
+                {
+                    id: "04CTsubCatFs04",
+                    name: "Add Product WEIGHT",
+                    route: "/"
+                },
+                {
+                    id: "04CTsubCatFs05",
+                    name: "Add Product SIZE",
+                    route: "/"
+                },
             ],
         },
         {
             id: "05CT",
             navTitle: "Users",
-            icon: FiUsers
+            icon: FiUsers,
+            route: "/"
         },
         {
             id: "06CT",
             navTitle: "Order",
-            icon: LiaShoppingBagSolid
+            icon: LiaShoppingBagSolid,
+            route: "/"
         },
         {
             id: "07CT",
             navTitle: "Banners",
             icon: GiVerticalBanner,
+            route: "/",
             subNav: [
-                { id: "07CTsubCatFs01", name: "Home Banner List" },
-                { id: "07CTsubCatFs02", name: "Add Home Banner" },
-                { id: "07CTsubCatFs03", name: "Home Banner List2" },
-                { id: "07CTsubCatFs04", name: "Add Banner" }
+                {
+                    id: "07CTsubCatFs01",
+                    name: "Home Banner List",
+                    route: "/"
+                },
+                {
+                    id: "07CTsubCatFs02",
+                    name: "Add Home Banner",
+                    route: "/"
+                },
+                {
+                    id: "07CTsubCatFs03",
+                    name: "Home Banner List2",
+                    route: "/"
+                },
+                {
+                    id: "07CTsubCatFs04",
+                    name: "Add Banner",
+                    route: "/"
+                }
             ],
         },
         {
             id: "08CT",
             navTitle: "Manage Logo",
-            icon: IoLogoBuffer
+            icon: IoLogoBuffer,
+            route: "/"
         },
         {
             id: "09CT",
             navTitle: "Logout",
-            icon: AiOutlineLogout
+            icon: AiOutlineLogout,
+            route: "/"
         },
     ];
 
@@ -135,7 +203,7 @@ export default function SideMenu({ isOpenSideMenuPanel, setIsOpenSideMenuPanel }
                                         className='border p-1 rounded-full'
                                         onClick={(e) => {
                                             e.stopPropagation();
-                                            toggleNav(nav.id);
+                                            toggleNav(nav.route);
                                         }}
                                     >
                                         {isOpen ? <RiSubtractLine /> : <RiAddLine />}
@@ -149,7 +217,7 @@ export default function SideMenu({ isOpenSideMenuPanel, setIsOpenSideMenuPanel }
                                     {nav.subNav.map(sub => (
                                         <Link
                                             key={sub.id}
-                                            to={`/admin/${sub.id}`}
+                                            to={`/admin${sub.route}`}
                                             onClick={handleClose}
                                             className="block my-1 py-2 px-2 text-sm rounded hover:bg-slate-200"
                                         >

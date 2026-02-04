@@ -3,6 +3,7 @@ import Login from "./Pages/Login";
 import SignUp from "./Pages/SignUp";
 import NavBar from "./Components/Header";
 import Dashboard from "./Pages/Dashboard";
+import AddNewProductCategory from "./Pages/ProductCategory/AddNewProductCategory";
 
 function App() {
   return (
@@ -12,6 +13,12 @@ function App() {
         <Route path="/" element={<Dashboard />} />
         <Route path="/login" element={<Login />} />
         <Route path="/Signup" element={<SignUp />} />
+
+
+        {/* Product category */}
+        <Route path="/add-product-category" element={<AddNewProductCategory />} />
+
+        
       </Routes>
     </BrowserRouter>
   );
