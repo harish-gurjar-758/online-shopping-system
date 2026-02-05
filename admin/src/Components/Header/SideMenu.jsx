@@ -81,7 +81,7 @@ export default function SideMenu({ isOpenSideMenuPanel, setIsOpenSideMenuPanel }
                 {
                     id: "04CTsubCatFs02",
                     name: "Product Upload",
-                    route: "/"
+                    route: "/add-product"
                 },
                 {
                     id: "04CTsubCatFs03",
