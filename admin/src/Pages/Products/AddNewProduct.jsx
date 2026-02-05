@@ -1,7 +1,50 @@
 import Button from '@mui/material/Button'
-import React from 'react'
+import React, { useState } from 'react'
+
+import CloudUploadIcon from '@mui/icons-material/CloudUpload'
+import { styled } from '@mui/material/styles'
+
+const VisuallyHiddenInput = styled('input')({
+    clip: 'rect(0 0 0 0)',
+    clipPath: 'inset(50%)',
+    height: 1,
+    overflow: 'hidden',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    whiteSpace: 'nowrap',
+    width: 1,
+})
 
 export default function AddNewProduct() {
+
+    const [formData, setFormData] = useState({
+        title: '',
+        category: '',
+        oldPrice: '',
+        newPrice: '',
+        longDescription: '',
+        shortDescription: '',
+        productSizes: '',
+        availableStock: '',
+        isActive: ''
+    });
+
+
+    const [images, setImages] = useState([])
+
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value,
+        })
+    }
+
+    const handleImageUpload = (e) => {
+        const files = Array.from(e.target.files)
+        setImages(files)
+    }
+
     return (
         <div className='w-full mt-[100px] pb-[40px]'>
             <header className='pl-6 mb-5'>
@@ -17,6 +60,9 @@ export default function AddNewProduct() {
                                     type="text"
                                     className='w-full h-[50px] border-2 border-[rgba(0,0,0,0.1)] rounded-md focus:border-[rgba(0,0,0,0.7)] focus:outline-none px-3'
                                     placeholder='Product Title'
+                                    name='title'
+                                    value={formData.title}
+                                    onChange={handleChange}
                                 />
                             </div>
                             <div className='form-group mb-4 w-full'>
@@ -25,6 +71,9 @@ export default function AddNewProduct() {
                                     type="text"
                                     className='w-full h-[50px] border-2 border-[rgba(0,0,0,0.1)] rounded-md focus:border-[rgba(0,0,0,0.7)] focus:outline-none px-3'
                                     placeholder='Product Category'
+                                    name='category'
+                                    value={formData.category}
+                                    onChange={handleChange}
                                 />
                             </div>
                         </div>
@@ -35,6 +84,9 @@ export default function AddNewProduct() {
                                     type="text"
                                     className='w-full h-[50px] border-2 border-[rgba(0,0,0,0.1)] rounded-md focus:border-[rgba(0,0,0,0.7)] focus:outline-none px-3'
                                     placeholder='Old Price'
+                                    name='oldPrice'
+                                    value={formData.oldPrice}
+                                    onChange={handleChange}
                                 />
                             </div>
                             <div className='form-group mb-4 w-full'>
@@ -43,6 +95,9 @@ export default function AddNewProduct() {
                                     type="text"
                                     className='w-full h-[50px] border-2 border-[rgba(0,0,0,0.1)] rounded-md focus:border-[rgba(0,0,0,0.7)] focus:outline-none px-3'
                                     placeholder='New Price'
+                                    name='newPrice'
+                                    value={formData.newPrice}
+                                    onChange={handleChange}
                                 />
                             </div>
                         </div>
@@ -53,6 +108,9 @@ export default function AddNewProduct() {
                                     type="text"
                                     className='w-full h-[50px] border-2 border-[rgba(0,0,0,0.1)] rounded-md focus:border-[rgba(0,0,0,0.7)] focus:outline-none px-3'
                                     placeholder='Product Sizes'
+                                    name='productSizes'
+                                    value={formData.productSizes}
+                                    onChange={handleChange}
                                 />
                             </div>
                             <div className='form-group mb-4 w-full'>
@@ -61,6 +119,9 @@ export default function AddNewProduct() {
                                     type="text"
                                     className='w-full h-[50px] border-2 border-[rgba(0,0,0,0.1)] rounded-md focus:border-[rgba(0,0,0,0.7)] focus:outline-none px-3'
                                     placeholder='Available Stock'
+                                    name='availableStock'
+                                    value={formData.availableStock}
+                                    onChange={handleChange}
                                 />
                             </div>
                         </div>
@@ -70,6 +131,9 @@ export default function AddNewProduct() {
                                 type="text"
                                 className='w-full h-[50px] border-2 border-[rgba(0,0,0,0.1)] rounded-md focus:border-[rgba(0,0,0,0.7)] focus:outline-none px-3'
                                 placeholder='Logn Description'
+                                name='longDescription'
+                                value={formData.longDescription}
+                                onChange={handleChange}
                             />
                         </div>
                         <div className='form-group mb-4 w-full'>
@@ -78,15 +142,31 @@ export default function AddNewProduct() {
                                 type="text"
                                 className='w-full h-[50px] border-2 border-[rgba(0,0,0,0.1)] rounded-md focus:border-[rgba(0,0,0,0.7)] focus:outline-none px-3'
                                 placeholder='Short Description'
+                                name='shortDescription'
+                                value={formData.shortDescription}
+                                onChange={handleChange}
                             />
                         </div>
                         <div className='flex gap-3'>
                             <div className='form-group mb-4 w-full'>
                                 <h4 className='form-group mb-4 w-full'>Product Banners</h4>
-                                <input
+                                {/* <input
                                     type="file"
                                     className='w-full h-[50px] border-2 border-[rgba(0,0,0,0.1)] rounded-md focus:border-[rgba(0,0,0,0.7)] focus:outline-none px-3'
-                                />
+                                /> */}
+                                <Button
+                                    component="label"
+                                    variant="outlined"
+                                    startIcon={<CloudUploadIcon />}
+                                >
+                                    Upload Files
+                                    <VisuallyHiddenInput
+                                        type="file"
+                                        multiple
+                                        accept="image/*"
+                                        onChange={handleImageUpload}
+                                    />
+                                </Button>
                             </div>
                             <div className='form-group mb-4 w-full'>
                                 <h4 className='form-group mb-4 w-full'>Is Active</h4>
@@ -94,6 +174,9 @@ export default function AddNewProduct() {
                                     type="text"
                                     className='w-full h-[50px] border-2 border-[rgba(0,0,0,0.1)] rounded-md focus:border-[rgba(0,0,0,0.7)] focus:outline-none px-3'
                                     placeholder='Is Active'
+                                    name='isActive'
+                                    value={formData.isActive}
+                                    onChange={handleChange}
                                 />
                             </div>
                         </div>
@@ -103,8 +186,8 @@ export default function AddNewProduct() {
                         <div className='bg-gray-700 !w-[30px], h-[40px]'>
                             <img src="" alt="" className='w-full' />
                         </div>
-                        <h2>Product Category : <span className='text-gray-500'>...</span> </h2>
-                        <p>Description : <span className='text-gray-500'>...</span></p>
+                        <h2>Product Category : <span className='text-gray-500'>{FormData.title}</span> </h2>
+                        <p>Short Description : <span className='text-gray-500'>{FormData.shortDescription}</span></p>
                     </div>
                 </div>
             </div>
