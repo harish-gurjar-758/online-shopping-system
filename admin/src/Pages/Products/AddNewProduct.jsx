@@ -17,7 +17,7 @@ const VisuallyHiddenInput = styled('input')({
 })
 
 export default function AddNewProduct() {
-
+    const [activeImage, setActiveImage] = useState(null)
     const [formData, setFormData] = useState({
         title: '',
         category: '',
@@ -183,11 +183,89 @@ export default function AddNewProduct() {
                         <Button className='w-fit' variant="contained">Add Product</Button>
                     </form>
                     <div className='w-[49%] h-full px-3'>
-                        <div className='bg-gray-700 !w-[30px], h-[40px]'>
-                            <img src="" alt="" className='w-full' />
+                        <div className='flex flex-wrap gap-3 mt-3'>
+
+                            {/* LARGE IMAGE */}
+                            <div className='w-full h-[300px] border rounded overflow-hidden mb-3 group'>
+                                {activeImage ? (
+                                    <img
+                                        src={activeImage}
+                                        alt="Selected"
+                                        className='w-full h-full object-cover transition-transform duration-300 group-hover:scale-125'
+                                    />
+                                ) : (
+                                    <div className='w-full h-full flex items-center justify-center text-gray-400'>
+                                        Select an image
+                                    </div>
+                                )}
+                            </div>
+
+                            {/* THUMBNAILS */}
+                            <div className='flex flex-wrap gap-3'>
+                                {images.length > 0 ? (
+                                    images.map((img, index) => {
+                                        const imgUrl = URL.createObjectURL(img)
+
+                                        return (
+                                            <img
+                                                key={index}
+                                                src={imgUrl}
+                                                alt="preview"
+                                                onMouseEnter={() => setActiveImage(imgUrl)}
+                                                onClick={() => setActiveImage(imgUrl)}
+                                                className='w-[90px] h-[90px] object-cover border rounded cursor-pointer hover:border-orange-500'
+                                            />
+                                        )
+                                    })
+                                ) : (
+                                    <p className='text-gray-400'>No images uploaded</p>
+                                )}
+                            </div>
                         </div>
-                        <h2>Product Category : <span className='text-gray-500'>{FormData.title}</span> </h2>
-                        <p>Short Description : <span className='text-gray-500'>{FormData.shortDescription}</span></p>
+                        <h2 className='mb-2'>
+                            Product Title :
+                            <span className='text-gray-500'>
+                                {' '}{formData.title || '---'}
+                            </span>
+                        </h2>
+                        <div className='flex gap-4 my-3'>
+                            <p>Old Price :
+                                <span className='text-red-600 line-through text-[22px] font-500'>
+                                    {' '} {formData.oldPrice || "....."}{' '}₹
+                                </span>
+                            </p>
+                            <p>New Price :
+                                <span className='text-green-600 text-[22px] font-500 '>
+                                    {' '}{formData.newPrice || "....."}{' '}₹
+                                </span>
+                            </p>
+
+                        </div>
+                        <p>Product Sizes :
+                            <span className='text-gray-500'>
+                                {' '}{formData.productSizes || '.....'}
+                            </span>
+                        </p>
+                        <p>Available Stock :
+                            <span className='text-gray-500'>
+                                {' '}{formData.availableStock || '.....'}
+                            </span>
+                        </p>
+                        <p>Is Active :
+                            <span className='text-gray-500'>
+                                {' '}{formData.isActive || '.....'}
+                            </span>
+                        </p>
+                        <p>Short Description :
+                            <span className='text-gray-500'>
+                                {' '}{formData.shortDescription || '.....'}
+                            </span>
+                        </p>
+                        <p>Long Description :
+                            <span className='text-gray-500'>
+                                {' '}{formData.longDescription || '.....'}
+                            </span>
+                        </p>
                     </div>
                 </div>
             </div>
