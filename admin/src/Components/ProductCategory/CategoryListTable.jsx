@@ -65,12 +65,7 @@ export default function CategoryListTable() {
             try {
                 const response = await GetAllProductCategoryApi()
 
-                console.log('API RESPONSE 👉', response)
-
-                // ✅ FIXED HERE (THIS IS THE BUG)
                 const categories = response?.productCategory || []
-
-                console.log('FINAL CATEGORIES 👉', categories)
 
                 setRows(categories)
             } catch (error) {
