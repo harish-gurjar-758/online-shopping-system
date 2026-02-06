@@ -76,7 +76,7 @@ export default function SideMenu({ isOpenSideMenuPanel, setIsOpenSideMenuPanel }
                 {
                     id: "04CTsubCatFs01",
                     name: "Product List",
-                    route: "/"
+                    route: "/product-list"
                 },
                 {
                     id: "04CTsubCatFs02",
