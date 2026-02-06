@@ -65,15 +65,14 @@ export default function CategoryListTable() {
             try {
                 const response = await GetAllProductCategoryApi()
 
-                console.log("API RESPONSE 👉", response)
+                console.log('API RESPONSE 👉', response)
 
-                const categories =
-                    response?.data?.productCategories ||
-                    response?.data?.data ||
-                    response?.data ||
-                    []
+                // ✅ FIXED HERE (THIS IS THE BUG)
+                const categories = response?.productCategory || []
 
-                setRows(Array.isArray(categories) ? categories : [])
+                console.log('FINAL CATEGORIES 👉', categories)
+
+                setRows(categories)
             } catch (error) {
                 console.error('Category fetch error:', error)
                 setRows([])
@@ -83,7 +82,7 @@ export default function CategoryListTable() {
         }
 
         fetchCategories()
-    }, []);
+    }, [])
 
     return (
         <Box sx={{ width: '100%' }}>
@@ -114,37 +113,14 @@ export default function CategoryListTable() {
                             {!loading &&
                                 rows.map((row) => (
                                     <TableRow key={row._id}>
-                                        <TableCell>
-                                            {row.image ? (
-                                                <img
-                                                    src={row.image}
-                                                    alt={row.categoryName}
-                                                    width="50"
-                                                    height="50"
-                                                    style={{ objectFit: 'cover', borderRadius: '6px' }}
-                                                />
-                                            ) : (
-                                                'No Image'
-                                            )}
-                                        </TableCell>
-
+                                        <TableCell>No Image</TableCell>
                                         <TableCell>{row.categoryName}</TableCell>
-
                                         <TableCell>{row.description}</TableCell>
-
                                         <TableCell>
-                                            <Button
-                                                variant="outlined"
-                                                size="small"
-                                                sx={{ mr: 1 }}
-                                            >
+                                            <Button size="small" sx={{ mr: 1 }}>
                                                 Edit
                                             </Button>
-                                            <Button
-                                                variant="outlined"
-                                                color="error"
-                                                size="small"
-                                            >
+                                            <Button size="small" color="error">
                                                 Delete
                                             </Button>
                                         </TableCell>
