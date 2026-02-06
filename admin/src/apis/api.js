@@ -9,7 +9,7 @@ const API = "http://localhost:5000/api";
 // Create New Product category
 export const AddNewProductCategoryApi = async (formData) => {
     try {
-        const response = await axios.post(`${API}/create`, formData);
+        const response = await axios.post(`${API}/product-category/create`, formData);
         return response.data;
     } catch (error) {
         if (error.response) {
@@ -24,3 +24,22 @@ export const AddNewProductCategoryApi = async (formData) => {
         };
     }
 };
+
+// Get All Product Category
+export const GetAllProductCategoryApi = async () => {
+    try {
+        const response = await axios.get(`${API}/product-category`, formData);
+        return response.data;
+    } catch (error) {
+        if (error.response) {
+            return {
+                error: true,
+                message: error.response.data.message
+            }
+        }
+        return {
+            error: true,
+            message: "Server not responding to get product category"
+        };
+    }
+}

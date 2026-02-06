@@ -23,9 +23,9 @@ app.use(express.json());
 connectDB();
 
 // API Routes
-app.use('/api', authRoutes);
-app.use('/api', productRoutes);
-app.use('/api', productCategoryRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/product', productRoutes);
+app.use('/api/product-category', productCategoryRoutes);
 
 // Server Listen
 app.listen(PORT, () => {
