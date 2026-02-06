@@ -2,12 +2,45 @@ import Button from '@mui/material/Button'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AddNewProductCategoryApi } from '../../apis/api'
+import CloudUploadIcon from '@mui/icons-material/CloudUpload'
+import { styled } from '@mui/material/styles'
+
+const VisuallyHiddenInput = styled('input')({
+    clip: 'rect(0 0 0 0)',
+    clipPath: 'inset(50%)',
+    height: 1,
+    overflow: 'hidden',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    whiteSpace: 'nowrap',
+    width: 1,
+})
 
 export default function AddNewProductCategory() {
     const [productCategory, setProductCategory] = useState('')
     const [description, setDescription] = useState('')
     const [loading, setLoading] = useState(false)
+
+    // ✅ LOGO STATES (UNCHANGED NAME)
+    const [logo, setLogo] = useState(null)
+    const [previewLogo, setPreviewLogo] = useState(null)
+
     const navigate = useNavigate()
+
+    // ✅ LOGO UPLOAD LOGIC (FIXED)
+    const handleImageUpload = (e) => {
+        const file = e.target.files[0]
+        if (!file) return
+
+        if (!file.type.startsWith('image/')) {
+            alert('Please upload a valid image')
+            return
+        }
+
+        setLogo(file)
+        setPreviewLogo(URL.createObjectURL(file))
+    }
 
     // Submit product category
     const handleSubmit = async (e) => {
@@ -16,19 +49,25 @@ export default function AddNewProductCategory() {
         try {
             setLoading(true)
 
-            const formData = {
-                categoryName: productCategory,
-                description: description,
+            // ✅ FORM DATA WITH LOGO
+            const formData = new FormData()
+            formData.append('categoryName', productCategory)
+            formData.append('description', description)
+
+            if (logo) {
+                formData.append('logo', logo)
             }
 
             const res = await AddNewProductCategoryApi(formData)
 
             if (res?.error) {
-                alert(res.message)   // ✅ FIX
+                alert(res.message)
             } else {
                 alert('Product category added successfully')
                 setProductCategory('')
                 setDescription('')
+                setLogo(null)
+                setPreviewLogo(null)
                 navigate('/')
             }
 
@@ -66,6 +105,22 @@ export default function AddNewProductCategory() {
                         </div>
 
                         <div className='form-group mb-4 w-full'>
+                            <h4 className='form-group mb-4 w-full'>Category Logo</h4>
+                            <Button
+                                component="label"
+                                variant="outlined"
+                                startIcon={<CloudUploadIcon />}
+                            >
+                                Upload Files
+                                <VisuallyHiddenInput
+                                    type="file"
+                                    accept="image/*"
+                                    onChange={handleImageUpload}
+                                />
+                            </Button>
+                        </div>
+
+                        <div className='form-group mb-4 w-full'>
                             <h4 className='form-group mb-4 w-full'>Description</h4>
                             <input
                                 type="text"
@@ -79,8 +134,8 @@ export default function AddNewProductCategory() {
                         <Button
                             className='w-fit'
                             variant="contained"
-                            type="submit"      // ✅ FIX
-                            disabled={loading} // ✅ SAFE
+                            type="submit"
+                            disabled={loading}
                         >
                             {loading ? 'Saving...' : 'Add Product Category'}
                         </Button>
@@ -88,7 +143,7 @@ export default function AddNewProductCategory() {
 
                     <div className='w-[49%] h-full px-3'>
                         <div className='bg-gray-700 !w-[30px], h-[40px]'>
-                            <img src="" alt="" className='w-full' />
+                            <img src={previewLogo || ''} alt="" className='w-full' />
                         </div>
                         <h2>
                             Product Category :

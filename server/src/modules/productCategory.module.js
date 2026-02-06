@@ -3,7 +3,8 @@ import mongoose from "mongoose";
 // Product Category Schema
 const productCategorySchema = new mongoose.Schema({
     categoryName: { type: String },
-    description: { type: String }
+    description: { type: String },
+    logo: { type: String }
 });
 
 // Create and export model

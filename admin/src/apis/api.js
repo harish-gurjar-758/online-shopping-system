@@ -9,7 +9,9 @@ const API = "http://localhost:5000/api";
 // Create New Product category
 export const AddNewProductCategoryApi = async (formData) => {
     try {
-        const response = await axios.post(`${API}/product-category/create`, formData);
+        const response = await axios.post(`${API}/product-category/create`, formData, {
+            headers: { "Content-Type": "multipart/form-data" },
+        });
         return response.data;
     } catch (error) {
         if (error.response) {

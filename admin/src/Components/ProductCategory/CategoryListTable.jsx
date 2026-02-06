@@ -108,7 +108,7 @@ export default function CategoryListTable() {
                             {!loading &&
                                 rows.map((row) => (
                                     <TableRow key={row._id}>
-                                        <TableCell>No Image</TableCell>
+                                        <TableCell><img src={row.logo} alt={row.categoryName} className='w-[20px]' /></TableCell>
                                         <TableCell>{row.categoryName}</TableCell>
                                         <TableCell>{row.description}</TableCell>
                                         <TableCell>
