@@ -27,6 +27,26 @@ export const createProductCategory = async (req, res) => {
     }
 };
 
+// Get total product category count
+export const getProductCategoryCount = async (req, res) => {
+  try {
+    const totalCount = await ProductCategory.countDocuments();
+
+    res.status(200).json({
+      success: true,
+      totalCategories: totalCount,
+    });
+
+  } catch (error) {
+    console.error("Category Count Error:", error);
+
+    res.status(500).json({
+      success: false,
+      message: "Failed to fetch product category count",
+    });
+  }
+};
+
 // Get all Product Category
 export const getAllProductCategory = async (req, res) => {
     try {

@@ -25,21 +25,44 @@ export const AddNewProductCategoryApi = async (formData) => {
     }
 };
 
-// Get All Product Category
-export const GetAllProductCategoryApi = async () => {
+// Get Total count of product category
+export const GetTotalCountProductCategoryApi = async () => {
     try {
-        const response = await axios.get(`${API}/product-category`, formData);
+        const response = await axios.get(
+            `${API}/product-category/total-count`
+        );
         return response.data;
     } catch (error) {
         if (error.response) {
             return {
                 error: true,
                 message: error.response.data.message
-            }
+            };
         }
         return {
             error: true,
             message: "Server not responding to get product category"
         };
     }
-}
+};
+
+// Get All Product Category
+export const GetAllProductCategoryApi = async () => {
+    try {
+        const response = await axios.get(
+            `${API}/product-category`
+        );
+        return response.data;
+    } catch (error) {
+        if (error.response) {
+            return {
+                error: true,
+                message: error.response.data.message
+            };
+        }
+        return {
+            error: true,
+            message: "Server not responding to get product category"
+        };
+    }
+};

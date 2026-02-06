@@ -1,13 +1,29 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import WelcomeSection from '../../Components/Dashboard/WelcomeSection';
 import { FiPieChart } from "react-icons/fi";
 import { IoStatsChart } from "react-icons/io5";
 import { GoGift } from "react-icons/go";
 import { RiProductHuntLine } from "react-icons/ri";
 import { BiSolidCategoryAlt } from "react-icons/bi";
+import { GetTotalCountProductCategoryApi } from '../../apis/api';
 
 
 export default function Dashboard() {
+
+    const [totalCategory, setTotalCategory] = useState(0);
+
+    useEffect(() => {
+        const fetchCategoryCount = async () => {
+            const res = await GetTotalCountProductCategoryApi();
+
+            if (res?.success) {
+                setTotalCategory(res.totalCategories);
+            }
+        };
+
+        fetchCategoryCount();
+    }, []);
+
     return (
         <div className='w-full mt-[100px]'>
             <div className="container">
@@ -44,7 +60,7 @@ export default function Dashboard() {
                         <BiSolidCategoryAlt className='text-[30px]' />
                         <div className='px-5'>
                             <p className='text-[22px]'>Total Category</p>
-                            <h1 className='font-bold text-[22px]'>9</h1>
+                            <h1 className='font-bold text-[22px]'>{totalCategory}</h1>
                         </div>
                         <IoStatsChart className='text-[30px]' />
                     </div>
