@@ -1,8 +1,9 @@
 import Button from '@mui/material/Button'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import CloudUploadIcon from '@mui/icons-material/CloudUpload'
 import { styled } from '@mui/material/styles'
+import { GetAllProductCategoryApi } from '../../apis/api'
 
 const VisuallyHiddenInput = styled('input')({
     clip: 'rect(0 0 0 0)',
@@ -17,7 +18,9 @@ const VisuallyHiddenInput = styled('input')({
 })
 
 export default function AddNewProduct() {
-    const [activeImage, setActiveImage] = useState(null)
+    const [activeImage, setActiveImage] = useState(null);
+    const [productCategories, setProductCategories] = useState([]);
+    const [loadingCategories, setLoadingCategories] = useState(false);
     const [formData, setFormData] = useState({
         title: '',
         category: '',
@@ -33,6 +36,25 @@ export default function AddNewProduct() {
 
     const [images, setImages] = useState([])
 
+    useEffect(() => {
+        const fetchCategories = async () => {
+            try {
+                setLoadingCategories(true);
+                const res = await GetAllProductCategoryApi();
+
+                if (!res?.error && Array.isArray(res.productCategories)) {
+                    setProductCategories(res.productCategories);
+                }
+            } catch (error) {
+                console.error("Failed to fetch product categories", error);
+            } finally {
+                setLoadingCategories(false);
+            }
+        };
+
+        fetchCategories();
+    }, []);
+
     const handleChange = (e) => {
         setFormData({
             ...formData,
@@ -44,6 +66,14 @@ export default function AddNewProduct() {
         const files = Array.from(e.target.files)
         setImages(files)
     }
+
+
+    const handleCategoryChange = (e) => {
+        setFormData(prev => ({
+            ...prev,
+            category: e.target.value,
+        }));
+    };
 
     return (
         <div className='w-full mt-[100px] pb-[40px]'>
@@ -67,14 +97,26 @@ export default function AddNewProduct() {
                             </div>
                             <div className='form-group mb-4 w-full'>
                                 <h4 className='form-group mb-4 w-full'>Product Category</h4>
-                                <input
-                                    type="text"
+                                <select
+                                    name='category'
                                     className='w-full h-[50px] border-2 border-[rgba(0,0,0,0.1)] rounded-md focus:border-[rgba(0,0,0,0.7)] focus:outline-none px-3'
                                     placeholder='Product Category'
-                                    name='category'
                                     value={formData.category}
-                                    onChange={handleChange}
-                                />
+                                    onChange={handleCategoryChange}
+                                >
+
+
+                                    <option value="" disabled>
+                                        {loadingCategories ? "Loading..." : "Select Product Category"}
+                                    </option>
+
+                                    {productCategories.map(item => (
+                                        <option key={item._id} value={item._id}>
+                                            {item.categoryName}
+                                        </option>
+                                    ))}
+                                </select>
+
                             </div>
                         </div>
                         <div className='flex gap-3'>
@@ -182,6 +224,8 @@ export default function AddNewProduct() {
                         </div>
                         <Button className='w-fit' variant="contained">Add Product</Button>
                     </form>
+
+                    {/* ------ */}
                     <div className='w-[49%] h-full px-3'>
                         <div className='flex flex-wrap gap-3 mt-3'>
 

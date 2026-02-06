@@ -11,6 +11,7 @@ import AddNewProductCategory from "./Pages/ProductCategory/AddNewProductCategory
 
 // ---
 import AddNewProduct from "./Pages/Products/AddNewProduct";
+import ProductCategoryList from "./Pages/ProductCategory/ProductCategoryList";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
 
         {/* Product category */}
         <Route path="/admin/add-product-category" element={<AddNewProductCategory />} />
+        <Route path="/admin/product-category-list" element={<ProductCategoryList />} />
 
         {/* Product */}
         <Route path="/admin/add-product" element={<AddNewProduct />} />
