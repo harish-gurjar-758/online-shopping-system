@@ -6,6 +6,7 @@ import { GoGift } from "react-icons/go";
 import { RiProductHuntLine } from "react-icons/ri";
 import { BiSolidCategoryAlt } from "react-icons/bi";
 import { GetTotalCountProductCategoryApi } from '../../apis/api';
+import ProductCategoryTable from '../../Components/Dashboard/ProductCategoryTable';
 
 
 export default function Dashboard() {
@@ -64,6 +65,10 @@ export default function Dashboard() {
                         </div>
                         <IoStatsChart className='text-[30px]' />
                     </div>
+                </div>
+
+                <div className='mt-10'>
+                    <ProductCategoryTable />
                 </div>
             </div>
         </div>
