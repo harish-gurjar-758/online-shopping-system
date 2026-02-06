@@ -1,7 +1,7 @@
 import Button from '@mui/material/Button'
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { AddNewProductCategoryApi, GetProductCategorybyIdApi } from '../../apis/api'
+import { useNavigate, useParams } from 'react-router-dom'
+import { GetProductCategorybyIdApi, AddNewProductCategoryApi, UpdateProductCategorybyId } from '../../apis/api'
 import CloudUploadIcon from '@mui/icons-material/CloudUpload'
 import { styled } from '@mui/material/styles'
 
@@ -22,25 +22,35 @@ export default function UpdateProductCategory() {
     const [description, setDescription] = useState('')
     const [loading, setLoading] = useState(false)
 
-    // LOGO STATES (UNCHANGED NAME)
+    // LOGO STATES
     const [logo, setLogo] = useState(null)
     const [previewLogo, setPreviewLogo] = useState(null)
 
-    const navigate = useNavigate();
+    const navigate = useNavigate()
+    const { id } = useParams()
 
     // GET PRODUCT CATEGORY BY ID
-    useEffect(()=>{
-const fetchPoductCategoryById = async ()=>{
-    setLoading(true)
-    try {
-        const response = await GetProductCategorybyIdApi()
-    } catch (error) {
-        
-    }
-}
-    }, [])
+    useEffect(() => {
+        const fetchProductCategoryById = async () => {
+            setLoading(true)
+            try {
+                const res = await GetProductCategorybyIdApi(id)
+                if (!res?.error) {
+                    setProductCategory(res.productCategory.categoryName)
+                    setDescription(res.productCategory.description)
+                    setPreviewLogo(res.productCategory.logo) // existing logo
+                }
+            } catch (error) {
+                console.error(error)
+            } finally {
+                setLoading(false)
+            }
+        }
 
-    // LOGO UPLOAD LOGIC (FIXED)
+        fetchProductCategoryById()
+    }, [id])
+
+    // LOGO UPLOAD
     const handleImageUpload = (e) => {
         const file = e.target.files[0]
         if (!file) return
@@ -54,14 +64,13 @@ const fetchPoductCategoryById = async ()=>{
         setPreviewLogo(URL.createObjectURL(file))
     }
 
-    // Submit product category
+    // SUBMIT UPDATE
     const handleSubmit = async (e) => {
         e.preventDefault()
 
         try {
             setLoading(true)
 
-            // FORM DATA WITH LOGO
             const formData = new FormData()
             formData.append('categoryName', productCategory)
             formData.append('description', description)
@@ -70,19 +79,14 @@ const fetchPoductCategoryById = async ()=>{
                 formData.append('logo', logo)
             }
 
-            const res = await AddNewProductCategoryApi(formData)
+            const res = await UpdateProductCategorybyId(formData, id);
 
             if (res?.error) {
                 alert(res.message)
             } else {
-                alert('Product category added successfully')
-                setProductCategory('')
-                setDescription('')
-                setLogo(null)
-                setPreviewLogo(null)
-                navigate('/')
+                alert('Product category updated successfully')
+                navigate('/admin/product-category-list')
             }
-
         } catch (error) {
             console.error(error)
             alert('Something went wrong')
@@ -90,6 +94,7 @@ const fetchPoductCategoryById = async ()=>{
             setLoading(false)
         }
     }
+
     return (
         <div className='w-full mt-[100px] pb-[40px]'>
             <header className='container pl-6 mb-5'>
@@ -108,7 +113,6 @@ const fetchPoductCategoryById = async ()=>{
                             <input
                                 type="text"
                                 className='w-full h-[50px] border-2 border-[rgba(0,0,0,0.1)] rounded-md focus:border-[rgba(0,0,0,0.7)] focus:outline-none px-3'
-                                placeholder='Product Category'
                                 value={productCategory}
                                 onChange={(e) => setProductCategory(e.target.value)}
                                 required
@@ -136,7 +140,6 @@ const fetchPoductCategoryById = async ()=>{
                             <input
                                 type="text"
                                 className='w-full h-[50px] border-2 border-[rgba(0,0,0,0.1)] rounded-md focus:border-[rgba(0,0,0,0.7)] focus:outline-none px-3'
-                                placeholder='Product Category Description'
                                 value={description}
                                 onChange={(e) => setDescription(e.target.value)}
                             />
@@ -148,32 +151,27 @@ const fetchPoductCategoryById = async ()=>{
                             type="submit"
                             disabled={loading}
                         >
-                            {loading ? 'Saving...' : 'Add Product Category'}
+                            {loading ? 'Saving...' : 'Update Product Category'}
                         </Button>
                     </form>
 
                     <div className='w-[49%] px-3'>
-                        <div className='flex flex-wrap gap-3 mt-3'>
-
-                            {/* LARGE IMAGE */}
-                            <div className='w-full h-[300px] border rounded overflow-hidden mb-3 group'>
-                                <img
-                                    src={previewLogo}
-                                    alt='Product Category Logo'
-                                    className='w-full h-full object-cover transition-transform duration-300 group-hover:scale-125'
-                                />
-                            </div>
+                        <div className='w-full h-[300px] border rounded overflow-hidden mb-3'>
+                            <img
+                                src={previewLogo}
+                                alt="Category Logo"
+                                className='w-full h-full object-cover'
+                            />
                         </div>
-                        <h2 className='mb-2'>
-                            Product Category  :
-                            <span className='text-gray-500'>
-                                {' '}{productCategory || '---'}
-                            </span>
+
+                        <h2>
+                            Product Category :
+                            <span className='text-gray-500'> {productCategory || '---'}</span>
                         </h2>
-                        <p>Description :
-                            <span className='text-gray-500'>
-                                {' '}{description || '.....'}
-                            </span>
+
+                        <p>
+                            Description :
+                            <span className='text-gray-500'> {description || '---'}</span>
                         </p>
                     </div>
 

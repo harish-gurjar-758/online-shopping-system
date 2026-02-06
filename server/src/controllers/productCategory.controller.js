@@ -140,9 +140,12 @@ export const deleteProductCategory = async (req, res) => {
             });
         }
 
-        // DELETE LOGO FROM CLOUDINARY
-        if (productCategory.logo) {
-            // Extract public_id from Cloudinary URL
+        // DELETE LOGO FROM CLOUDINARY (ONLY IF EXISTS)
+        if (
+            productCategory.logo &&
+            typeof productCategory.logo === "string" &&
+            productCategory.logo.includes("cloudinary")
+        ) {
             const publicId = productCategory.logo
                 .split("/")
                 .pop()

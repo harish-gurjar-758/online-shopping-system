@@ -70,10 +70,10 @@ export const GetAllProductCategoryApi = async () => {
 };
 
 // Get Product Category By Id
-export const GetProductCategorybyIdApi = async ()=>{
+export const GetProductCategorybyIdApi = async (id) => {
     try {
         const response = await axios.get(
-            `${API}/product-category`
+            `${API}/product-category/${id}`
         );
         return response.data;
     } catch (error) {
@@ -88,4 +88,53 @@ export const GetProductCategorybyIdApi = async ()=>{
             message: "Server not responding to get product category"
         };
     }
-}
+};
+
+// Update Product Category By Id
+export const UpdateProductCategorybyId = async (formData, id) => {
+    try {
+        const response = await axios.put(
+            `${API}/product-category/update/${id}`,
+            formData,
+            {
+                headers: { "Content-Type": "multipart/form-data" },
+            }
+        );
+
+        return response.data;
+
+    } catch (error) {
+        if (error.response) {
+            return {
+                error: true,
+                message: error.response.data.message
+            };
+        }
+
+        return {
+            error: true,
+            message: "Server not responding while updating product category"
+        };
+    }
+};
+
+// DELETE PRODUCT CATEGORY BY ID
+export const DeleteProductCategoryByIdApi = async (id) => {
+    try {
+        const response = await axios.delete(
+            `${API}/product-category/delete/${id}`
+        );
+        return response.data;
+    } catch (error) {
+        if (error.response) {
+            return {
+                error: true,
+                message: error.response.data.message
+            };
+        }
+        return {
+            error: true,
+            message: "Server not responding while deleting product category"
+        };
+    }
+};

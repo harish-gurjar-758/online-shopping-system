@@ -13,7 +13,7 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { GetAllProductCategoryApi } from '../../apis/api'
+import { GetAllProductCategoryApi, DeleteProductCategoryByIdApi } from '../../apis/api'
 import TablePagination from '@mui/material/TablePagination'
 import { useNavigate } from "react-router-dom";
 
@@ -84,7 +84,29 @@ export default function CategoryListTable() {
         }
 
         fetchCategories()
-    }, [])
+    }, []);
+
+    // Delete Product Category By Id
+    const handleDeleteCategory = async (id) => {
+        const confirmDelete = window.confirm("Are you sure you want to delete this category?");
+        if (!confirmDelete) return;
+
+        try {
+            const res = await DeleteProductCategoryByIdApi(id);
+
+            if (res?.error) {
+                alert(res.message);
+            } else {
+                alert("Product category deleted successfully");
+                // re-fetch list OR remove item from state
+                getAllProductCategory(); // or your existing fetch function
+            }
+        } catch (error) {
+            console.error(error);
+            alert("Something went wrong");
+        }
+    };
+
 
     return (
         <Box sx={{ width: '100%' }}>
@@ -128,7 +150,7 @@ export default function CategoryListTable() {
                                                 size="small"
                                                 sx={{ mr: 1 }}
                                                 startIcon={<BorderColorIcon />}
-                                                onClick={() => navigate(`/admin/update-product-category/:${row._id}`)}
+                                                onClick={() => navigate(`/admin/update-product-category/${row._id}`)}
                                             >
                                                 Edit
                                             </Button>
@@ -136,7 +158,7 @@ export default function CategoryListTable() {
                                                 size="small"
                                                 color="error"
                                                 startIcon={<DeleteIcon />}
-
+                                                onClick={() => handleDeleteCategory(row._id)}
                                             >
                                                 Delete
                                             </Button>
@@ -160,6 +182,6 @@ export default function CategoryListTable() {
                     }}
                 />
             </Paper>
-        </Box>
+        </Box >
     )
 }

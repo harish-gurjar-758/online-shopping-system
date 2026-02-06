@@ -68,7 +68,7 @@ export default function AddNewProductCategory() {
                 setDescription('')
                 setLogo(null)
                 setPreviewLogo(null)
-                navigate('/')
+                navigate('/admin/product-category-list')
             }
 
         } catch (error) {
