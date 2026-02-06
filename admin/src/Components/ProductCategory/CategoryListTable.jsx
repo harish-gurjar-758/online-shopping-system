@@ -128,7 +128,7 @@ export default function CategoryListTable() {
                                                 size="small"
                                                 sx={{ mr: 1 }}
                                                 startIcon={<BorderColorIcon />}
-                                                onClick={() => navigate('/admin/edit-product-category')}
+                                                onClick={() => navigate(`/admin/update-product-category/:${row._id}`)}
                                             >
                                                 Edit
                                             </Button>

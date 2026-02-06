@@ -68,3 +68,24 @@ export const GetAllProductCategoryApi = async () => {
         };
     }
 };
+
+// Get Product Category By Id
+export const GetProductCategorybyIdApi = async ()=>{
+    try {
+        const response = await axios.get(
+            `${API}/product-category`
+        );
+        return response.data;
+    } catch (error) {
+        if (error.response) {
+            return {
+                error: true,
+                message: error.response.data.message
+            };
+        }
+        return {
+            error: true,
+            message: "Server not responding to get product category"
+        };
+    }
+}

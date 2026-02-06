@@ -8,10 +8,11 @@ import Dashboard from "./Pages/Dashboard";
 
 // ---
 import AddNewProductCategory from "./Pages/ProductCategory/AddNewProductCategory";
+import ProductCategoryList from "./Pages/ProductCategory/ProductCategoryList";
+import UpdateProductCategory from "./Pages/ProductCategory/UpdateProductCategory";
 
 // ---
 import AddNewProduct from "./Pages/Products/AddNewProduct";
-import ProductCategoryList from "./Pages/ProductCategory/ProductCategoryList";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         {/* Product category */}
         <Route path="/admin/add-product-category" element={<AddNewProductCategory />} />
         <Route path="/admin/product-category-list" element={<ProductCategoryList />} />
+        <Route path="/admin/update-product-category/:id" element={<UpdateProductCategory />} />
 
         {/* Product */}
         <Route path="/admin/add-product" element={<AddNewProduct />} />
