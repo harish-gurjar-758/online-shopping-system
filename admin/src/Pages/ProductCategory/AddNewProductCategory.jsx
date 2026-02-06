@@ -80,9 +80,9 @@ export default function AddNewProductCategory() {
     }
 
     return (
-        <div className='w-full mt-[100px]'>
-            <header>
-                <h2>Add New Product Category</h2>
+        <div className='w-full mt-[100px] pb-[40px]'>
+            <header className='container pl-6 mb-5'>
+                <h2 className='bg-orange-600 w-fit p-2 text-white'>Add New Product Category</h2>
             </header>
 
             <div className='w-full flex items-center justify-center'>
@@ -141,20 +141,27 @@ export default function AddNewProductCategory() {
                         </Button>
                     </form>
 
-                    <div className='w-[49%] h-full px-3'>
-                        <div className='bg-gray-700 !w-[30px], h-[40px]'>
-                            <img src={previewLogo || ''} alt="" className='w-full' />
+                    <div className='w-[49%] px-3'>
+                        <div className='flex flex-wrap gap-3 mt-3'>
+
+                            {/* LARGE IMAGE */}
+                            <div className='w-full h-[300px] border rounded overflow-hidden mb-3 group'>
+                                <img
+                                    src={previewLogo}
+                                    alt='Product Category Logo'
+                                    className='w-full h-full object-cover transition-transform duration-300 group-hover:scale-125'
+                                />
+                            </div>
                         </div>
-                        <h2>
-                            Product Category :
+                        <h2 className='mb-2'>
+                            Product Category  :
                             <span className='text-gray-500'>
-                                {productCategory}
+                                {' '}{productCategory || '---'}
                             </span>
                         </h2>
-                        <p>
-                            Description :
+                        <p>Description :
                             <span className='text-gray-500'>
-                                {description}
+                                {' '}{description || '.....'}
                             </span>
                         </p>
                     </div>

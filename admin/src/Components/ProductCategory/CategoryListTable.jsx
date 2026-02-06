@@ -11,7 +11,11 @@ import TableRow from '@mui/material/TableRow'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
+import BorderColorIcon from '@mui/icons-material/BorderColor';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { GetAllProductCategoryApi } from '../../apis/api'
+import TablePagination from '@mui/material/TablePagination'
+import { useNavigate } from "react-router-dom";
 
 // ------ TABLE HEAD CONFIG ------
 const headCells = [
@@ -56,8 +60,11 @@ function EnhancedTableToolbar() {
 
 // ------ MAIN COMPONENT ------
 export default function CategoryListTable() {
-    const [loading, setLoading] = useState(true)
-    const [rows, setRows] = useState([])
+    const [loading, setLoading] = useState(true);
+    const [rows, setRows] = useState([]);
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(10);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchCategories = async () => {
@@ -108,14 +115,29 @@ export default function CategoryListTable() {
                             {!loading &&
                                 rows.map((row) => (
                                     <TableRow key={row._id}>
-                                        <TableCell><img src={row.logo} alt={row.categoryName} className='w-[20px]' /></TableCell>
+                                        <TableCell>
+                                            <img
+                                                src={row.logo}
+                                                alt={row.categoryName}
+                                                className='w-[50px]'
+                                            /></TableCell>
                                         <TableCell>{row.categoryName}</TableCell>
                                         <TableCell>{row.description}</TableCell>
                                         <TableCell>
-                                            <Button size="small" sx={{ mr: 1 }}>
+                                            <Button
+                                                size="small"
+                                                sx={{ mr: 1 }}
+                                                startIcon={<BorderColorIcon />}
+                                                onClick={() => navigate('/admin/edit-product-category')}
+                                            >
                                                 Edit
                                             </Button>
-                                            <Button size="small" color="error">
+                                            <Button
+                                                size="small"
+                                                color="error"
+                                                startIcon={<DeleteIcon />}
+
+                                            >
                                                 Delete
                                             </Button>
                                         </TableCell>
@@ -124,6 +146,19 @@ export default function CategoryListTable() {
                         </TableBody>
                     </Table>
                 </TableContainer>
+
+                <TablePagination
+                    component='div'
+                    rowsPerPageOptions={[10, 25, 50, 100]}
+                    count={rows.length}
+                    page={page}
+                    rowsPerPage={rowsPerPage}
+                    onPageChange={(_, newPage) => setPage(newPage)}
+                    onRowsPerPageChange={(e) => {
+                        setRowsPerPage(parseInt(e.target.value, 10));
+                        setPage(0);
+                    }}
+                />
             </Paper>
         </Box>
     )
