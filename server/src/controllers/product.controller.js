@@ -77,6 +77,24 @@ export const getAllProducts = async (req, res) => {
   }
 };
 
+export const getProductCount = async (req, res) => {
+  try {
+    const totalCount = await Product.countDocuments();
+
+    res.status(200).json({
+      success: true,
+      totalProducts: totalCount,
+    });
+  } catch (error) {
+    console.error("Product Cound Error : ", error);
+
+    res.status(500).json({
+      success: false,
+      message: "Failed to fetch poduct category count : ",
+    });
+  }
+};
+
 export const getProductById = async (req, res) => { }
 export const updateProduct = async (req, res) => { }
 export const deleteProduct = async (req, res) => { }

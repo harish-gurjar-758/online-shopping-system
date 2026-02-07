@@ -5,15 +5,25 @@ import { IoStatsChart } from "react-icons/io5";
 import { GoGift } from "react-icons/go";
 import { RiProductHuntLine } from "react-icons/ri";
 import { BiSolidCategoryAlt } from "react-icons/bi";
-import { GetTotalCountProductCategoryApi } from '../../apis/api';
+import { GetTotalCountProductApi, GetTotalCountProductCategoryApi } from '../../apis/api';
 import ProductCategoryTable from '../../Components/Dashboard/ProductCategoryTable';
 
 
 export default function Dashboard() {
-
+    const [totalProduct, setTotalProduct] = useState(0);
     const [totalCategory, setTotalCategory] = useState(0);
 
     useEffect(() => {
+
+        // --- Product Count ----
+        const fetchProductCount = async () => {
+            const responce = await GetTotalCountProductApi();
+            if (responce.success) {
+                setTotalProduct(responce.totalProducts);
+            }
+        };
+
+        // --- Product Category Count -----
         const fetchCategoryCount = async () => {
             const res = await GetTotalCountProductCategoryApi();
 
@@ -22,6 +32,7 @@ export default function Dashboard() {
             }
         };
 
+        fetchProductCount();
         fetchCategoryCount();
     }, []);
 
@@ -53,7 +64,7 @@ export default function Dashboard() {
                         <RiProductHuntLine className='text-[30px]' />
                         <div className='px-5'>
                             <p className='text-[22px]'>Total Product</p>
-                            <h1 className='font-bold text-[22px]'>50</h1>
+                            <h1 className='font-bold text-[22px]'>{totalProduct}</h1>
                         </div>
                         <IoStatsChart className='text-[30px]' />
                     </div>

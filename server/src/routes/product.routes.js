@@ -6,6 +6,7 @@ import {
   getProductById,
   updateProduct,
   deleteProduct,
+  getProductCount,
 } from "../controllers/product.controller.js";
 
 const router = express.Router();
@@ -15,6 +16,8 @@ router.post(
   productUpload.array("banner", 10), 
   createProduct
 );
+
+router.get('/total-count', getProductCount);
 
 router.get("/", getAllProducts);
 router.get("/:id", getProductById);
