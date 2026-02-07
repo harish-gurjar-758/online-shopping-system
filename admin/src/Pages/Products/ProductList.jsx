@@ -12,8 +12,10 @@ export default function ProductList() {
                 <h2 className='w-fit p-2 font-500'>Product Category List</h2>
                 <Button
                     variant="outlined"
-                    onClick={() => navigate('/admin/add-product-category')}
-                >Add Product</Button>
+                    onClick={() => navigate('/admin/add-product')}
+                >
+                    Add Product
+                </Button>
             </header>
             <div className="container">
                 <ProductListTable />

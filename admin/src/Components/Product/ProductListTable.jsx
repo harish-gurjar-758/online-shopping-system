@@ -14,12 +14,15 @@ import Typography from '@mui/material/Typography'
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { GetAllProductApi } from '../../apis/api'
+import { useNavigate } from 'react-router-dom';
 
 // ------ TABLE HEAD CONFIG ------
 const headCells = [
   { id: 'image', label: 'Image' },
   { id: 'categoryName', label: 'Category Name' },
   { id: 'description', label: 'Description' },
+  { id: 'availableStock', label: 'Available Stock' },
+  { id: 'isActive', label: 'Is Active' },
   { id: 'action', label: 'Action' },
 ]
 
@@ -56,6 +59,7 @@ function EnhancedTableToolbar() {
   )
 }
 
+// ------ MAIN COMPONENT -----
 export default function ProductListTable() {
   const [loading, setLoading] = useState(true);
   const [rows, setRows] = useState([]);
@@ -68,8 +72,7 @@ export default function ProductListTable() {
       setLoading(true);
       try {
         const response = await GetAllProductApi();
-
-        const products = response?.product || []
+        const products = response?.products || []
         setRows(products)
       } catch (error) {
         console.error('Product fetch error : ', error);
@@ -114,9 +117,39 @@ export default function ProductListTable() {
               {!loading && rows.map((row) => (
                 <TableRow key={row._id}>
                   <TableCell>
-                    <img src="dcfdf" alt={row.title} />
+                    <img
+                      src={row?.banner?.[0]}
+                      alt={row.title}
+                      style={{
+                        width: 60,
+                        height: 60,
+                        objectFit: 'cover',
+                        borderRadius: 6
+                      }}
+                    />
                   </TableCell>
+                  <TableCell>{row.title}</TableCell>
                   <TableCell>{row.shortDescription}</TableCell>
+                  <TableCell>{row.availableStock}</TableCell>
+                  <TableCell>{row.isActive}</TableCell>
+                  <TableCell>
+                    <Button
+                      size='small'
+                      sx={{ mr: 1 }}
+                      startIcon={<BorderColorIcon />}
+                      onClick={() => navigate(`/admin/update-product/${row._id}`)}
+                    >
+                      Edit
+                    </Button>
+                    <Button
+                      size='small'
+                      color='error'
+                      startIcon={<DeleteIcon />}
+                      onClick={() => handleDeleteProduct(row._id)}
+                    >
+                      Delete
+                    </Button>
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>

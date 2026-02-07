@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import CloudUploadIcon from '@mui/icons-material/CloudUpload'
 import { styled } from '@mui/material/styles'
 import { AddNewProductApi, GetAllProductCategoryApi } from '../../apis/api'
+import { useNavigate } from 'react-router-dom'
 
 const VisuallyHiddenInput = styled('input')({
     clip: 'rect(0 0 0 0)',
@@ -23,6 +24,8 @@ export default function AddNewProduct() {
     const [productCategories, setProductCategories] = useState([])
     const [loadingCategories, setLoadingCategories] = useState(false)
     const [loading, setLoading] = useState(false)
+
+    const navigate = useNavigate();
 
     const [images, setImages] = useState([])
 
@@ -131,6 +134,7 @@ export default function AddNewProduct() {
 
                 setImages([])
                 setActiveImage(null)
+                navigate('/admin/product-list');
             } else {
                 alert(response.message || "Something went wrong")
             }
