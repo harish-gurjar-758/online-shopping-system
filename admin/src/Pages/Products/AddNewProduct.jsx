@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 
 import CloudUploadIcon from '@mui/icons-material/CloudUpload'
 import { styled } from '@mui/material/styles'
-import { GetAllProductCategoryApi } from '../../apis/api'
+import { AddNewProductApi, GetAllProductCategoryApi } from '../../apis/api'
 
 const VisuallyHiddenInput = styled('input')({
     clip: 'rect(0 0 0 0)',
@@ -18,9 +18,14 @@ const VisuallyHiddenInput = styled('input')({
 })
 
 export default function AddNewProduct() {
-    const [activeImage, setActiveImage] = useState(null);
-    const [productCategories, setProductCategories] = useState([]);
-    const [loadingCategories, setLoadingCategories] = useState(false);
+
+    const [activeImage, setActiveImage] = useState(null)
+    const [productCategories, setProductCategories] = useState([])
+    const [loadingCategories, setLoadingCategories] = useState(false)
+    const [loading, setLoading] = useState(false)
+
+    const [images, setImages] = useState([])
+
     const [formData, setFormData] = useState({
         title: '',
         category: '',
@@ -30,50 +35,113 @@ export default function AddNewProduct() {
         shortDescription: '',
         productSizes: '',
         availableStock: '',
-        isActive: ''
-    });
+        isActive: true
+    })
 
-
-    const [images, setImages] = useState([])
-
+    /* ------------------ FETCH CATEGORIES ------------------ */
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                setLoadingCategories(true);
-                const res = await GetAllProductCategoryApi();
+                setLoadingCategories(true)
+                const res = await GetAllProductCategoryApi()
 
-                if (!res?.error && Array.isArray(res.productCategories)) {
-                    setProductCategories(res.productCategories);
+                if (!res?.error && Array.isArray(res.productCategory)) {
+                    setProductCategories(res?.productCategory || [])
                 }
             } catch (error) {
-                console.error("Failed to fetch product categories", error);
+                console.error("Category fetch failed", error)
             } finally {
-                setLoadingCategories(false);
+                setLoadingCategories(false)
             }
-        };
+        }
 
-        fetchCategories();
-    }, []);
+        fetchCategories()
+    }, [])
 
+    /* ------------------ INPUT HANDLER ------------------ */
     const handleChange = (e) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value,
-        })
+        const { name, value } = e.target
+
+        setFormData(prev => ({
+            ...prev,
+            [name]: value
+        }))
     }
 
+    /* ------------------ IMAGE HANDLER ------------------ */
     const handleImageUpload = (e) => {
         const files = Array.from(e.target.files)
         setImages(files)
+
+        if (files.length > 0) {
+            setActiveImage(URL.createObjectURL(files[0]))
+        }
     }
 
-
+    /* ------------------ CATEGORY HANDLER ------------------ */
     const handleCategoryChange = (e) => {
         setFormData(prev => ({
             ...prev,
-            category: e.target.value,
-        }));
-    };
+            category: e.target.value
+        }))
+    }
+
+    /* ------------------ SUBMIT PRODUCT ------------------ */
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+
+        try {
+            setLoading(true)
+
+            const submitData = new FormData()
+
+            submitData.append("title", formData.title)
+            submitData.append("category", formData.category)
+            submitData.append("oldPrice", Number(formData.oldPrice))
+            submitData.append("newPrice", Number(formData.newPrice))
+            submitData.append("longDescription", formData.longDescription)
+            submitData.append("shortDescription", formData.shortDescription)
+            submitData.append(
+                "productSizes",
+                JSON.stringify(formData.productSizes.split(',').map(s => s.trim()))
+            )
+            submitData.append("availableStock", Number(formData.availableStock))
+            submitData.append("isActive", formData.isActive === "true" || formData.isActive === true)
+
+            images.forEach(img => {
+                submitData.append("banner", img)
+            })
+
+            const response = await AddNewProductApi(submitData)
+
+            if (!response?.error) {
+                alert("✅ Product added successfully")
+
+                setFormData({
+                    title: '',
+                    category: '',
+                    oldPrice: '',
+                    newPrice: '',
+                    longDescription: '',
+                    shortDescription: '',
+                    productSizes: '',
+                    availableStock: '',
+                    isActive: true
+                })
+
+                setImages([])
+                setActiveImage(null)
+            } else {
+                alert(response.message || "Something went wrong")
+            }
+
+        } catch (error) {
+            console.error(error)
+            alert("Server Error")
+        } finally {
+            setLoading(false)
+        }
+    }
 
     return (
         <div className='w-full mt-[100px] pb-[40px]'>
@@ -82,7 +150,7 @@ export default function AddNewProduct() {
             </header>
             <div className='w-full flex items-center justify-center'>
                 <div className='w-[80%] flex items-center justify-between bg-white py-5 px-5 gap-3 flex-wrap'>
-                    <form className='border-r-2 w-[49%] px-3'>
+                    <form className='border-r-2 w-[49%] px-3' onSubmit={handleSubmit}>
                         <div className='flex gap-3'>
                             <div className='form-group mb-4 w-full'>
                                 <h4 className='form-group mb-4 w-full'>Product Title</h4>
@@ -104,8 +172,6 @@ export default function AddNewProduct() {
                                     value={formData.category}
                                     onChange={handleCategoryChange}
                                 >
-
-
                                     <option value="" disabled>
                                         {loadingCategories ? "Loading..." : "Select Product Category"}
                                     </option>
@@ -222,7 +288,14 @@ export default function AddNewProduct() {
                                 />
                             </div>
                         </div>
-                        <Button className='w-fit' variant="contained">Add Product</Button>
+                        <Button
+                            className='w-fit'
+                            variant="contained"
+                            type="submit"
+                            disabled={loading}
+                        >
+                            {loading ? "Adding..." : "Add Product"}
+                        </Button>
                     </form>
 
                     {/* ------ */}
