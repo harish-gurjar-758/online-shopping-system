@@ -7,6 +7,7 @@ import { RiProductHuntLine } from "react-icons/ri";
 import { BiSolidCategoryAlt } from "react-icons/bi";
 import { GetTotalCountProductApi, GetTotalCountProductCategoryApi } from '../../apis/api';
 import ProductCategoryTable from '../../Components/Dashboard/ProductCategoryTable';
+import ProductTable from '../../Components/Dashboard/ProductTable';
 
 
 export default function Dashboard() {
@@ -80,6 +81,10 @@ export default function Dashboard() {
 
                 <div className='mt-10'>
                     <ProductCategoryTable />
+                </div>
+
+                <div className='mt-10'>
+                    <ProductTable />
                 </div>
             </div>
         </div>

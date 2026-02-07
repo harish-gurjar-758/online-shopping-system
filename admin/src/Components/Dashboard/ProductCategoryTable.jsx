@@ -37,6 +37,7 @@ function getComparator(order, orderBy) {
 /* ===================== TABLE HEAD ===================== */
 const headCells = [
   { id: 'categoryName', label: 'Category Name' },
+  { id: 'logo', label: 'Logo' },
   { id: 'description', label: 'Description' },
 ];
 
@@ -176,6 +177,9 @@ export default function ProductCategoryTable() {
                       <Checkbox />
                     </TableCell>
                     <TableCell>{row.categoryName}</TableCell>
+                    <TableCell>
+                      <img src={row.logo} alt="" width='50px' />
+                    </TableCell>
                     <TableCell>{row.description || '-'}</TableCell>
                   </TableRow>
                 ))
