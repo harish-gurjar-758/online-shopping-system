@@ -1,5 +1,5 @@
 import express from "express";
-import upload from "../middleware/upload.js";
+import productUpload from "../middleware/productUpload.js";
 import {
   createProduct,
   getAllProducts,
@@ -12,7 +12,7 @@ const router = express.Router();
 
 router.post(
   "/create",
-  upload.array("banner", 5), // max 5 images
+  productUpload.array("banner", 10), 
   createProduct
 );
 
@@ -21,7 +21,7 @@ router.get("/:id", getProductById);
 
 router.put(
   "/update/:id",
-  upload.array("banner", 5),
+  productUpload.array("banner", 5),
   updateProduct
 );
 

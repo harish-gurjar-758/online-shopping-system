@@ -8,7 +8,7 @@ const storage = new CloudinaryStorage({
   params: async (req, file) => {
     return {
       folder: "product-category", // fix typo: 'examinetion-category'
-      allowed_formats: ["jpg", "jpeg", "png"],
+      allowed_formats: ["jpg", "jpeg", "png", "av", "gif", "avif"],
       public_id: `${Date.now()}-${file.originalname.split('.')[0]}`,
     };
   },
