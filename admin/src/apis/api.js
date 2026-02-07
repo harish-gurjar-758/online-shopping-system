@@ -141,7 +141,7 @@ export const DeleteProductCategoryByIdApi = async (id) => {
 
 
 // ***************
-// ** Product Category **
+// ** Product  **
 // ***************
 
 
@@ -167,7 +167,7 @@ export const AddNewProductApi = async (formData) => {
 };
 
 
-// Get Total count of product category
+// Get Total count of product 
 export const GetTotalCountProductApi = async () => {
     try {
         const response = await axios.get(
@@ -188,7 +188,7 @@ export const GetTotalCountProductApi = async () => {
     }
 };
 
-// Get All Product Category
+// Get All Product 
 export const GetAllProductApi = async () => {
     try {
         const response = await axios.get(
@@ -209,7 +209,7 @@ export const GetAllProductApi = async () => {
     }
 };
 
-// Get Product Category By Id
+// Get Product  By Id
 export const GetProductbyIdApi = async (id) => {
     try {
         const response = await axios.get(
@@ -230,7 +230,7 @@ export const GetProductbyIdApi = async (id) => {
     }
 };
 
-// Update Product Category By Id
+// Update Product  By Id
 export const UpdateProductbyId = async (formData, id) => {
     try {
         const response = await axios.put(
@@ -258,7 +258,7 @@ export const UpdateProductbyId = async (formData, id) => {
     }
 };
 
-// DELETE PRODUCT CATEGORY BY ID
+// DELETE PRODUCT  BY ID
 export const DeleteProductByIdApi = async (id) => {
     try {
         const response = await axios.delete(
