@@ -19,6 +19,10 @@ import Tooltip from '@mui/material/Tooltip';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
 import { GetAllProductApi } from '../../apis/api';
+import Button from '@mui/material/Button';
+import BorderColorIcon from '@mui/icons-material/BorderColor';
+import DeleteIcon from '@mui/icons-material/Delete';
+import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
 
 /* ================= SORTING ================= */
 
@@ -42,7 +46,11 @@ function getComparator(order, orderBy) {
 const headCells = [
     { id: 'title', label: 'Title' },
     { id: 'banner', label: 'Banner' },
+    { id: 'price', label: 'Price' },
     { id: 'shortDescription', label: 'Description' },
+    { id: 'stock', label: 'Stock' },
+    { id: 'ratings', label: 'Ratings' },
+    { id: 'action', label: 'Action' },
 ];
 
 function EnhancedTableHead({ order, orderBy, onRequestSort }) {
@@ -194,7 +202,37 @@ export default function ProductTable() {
                                         </TableCell>
 
                                         <TableCell>
+                                            <p className='text-gray-500 line-through'>{row.oldPrice || '-'}</p>
+                                            {row.newPrice || '-'}
+                                        </TableCell>
+                                        <TableCell>
                                             {row.shortDescription || '-'}
+                                        </TableCell>
+                                        <TableCell>
+                                            {row.availableStock || '-'}
+                                        </TableCell>
+                                        <TableCell>
+                                            {row.ratings || '-'}
+                                        </TableCell>
+                                        <TableCell>
+                                            <Button
+                                                size='small'
+                                                sx={{ mr: 1 }}
+                                                color='success'
+                                                startIcon={<BorderColorIcon />}
+                                            />
+                                            <Button
+                                                size='samll'
+                                                sx={{ mr: 1, alignItems: 'center' }}
+                                                color='primary'
+                                                startIcon={<RemoveRedEyeOutlinedIcon />}
+                                            />
+                                            <Button
+                                                size='samll'
+                                                sx={{ mr: 1 }}
+                                                color='error'
+                                                startIcon={<DeleteIcon />}
+                                            />
                                         </TableCell>
                                     </TableRow>
                                 ))
