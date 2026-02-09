@@ -15,6 +15,7 @@ import UpdateProductCategory from "./Pages/ProductCategory/UpdateProductCategory
 import AddNewProduct from "./Pages/Products/AddNewProduct";
 import ProductList from "./Pages/Products/ProductList";
 import UpdateProduct from "./Pages/Products/UpdateProduct";
+import ViewProduct from "./Pages/Products/ViewProduct";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
         <Route path="/admin/add-product" element={<AddNewProduct />} />
         <Route path="/admin/update-product/:id" element={<UpdateProduct />} />
         <Route path="/admin/product-list" element={<ProductList />} />
+        <Route path="/admin/product-view/:id" element={<ViewProduct />} />
 
       </Routes>
     </BrowserRouter>

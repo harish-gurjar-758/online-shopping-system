@@ -23,6 +23,7 @@ import Button from '@mui/material/Button';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import DeleteIcon from '@mui/icons-material/Delete';
 import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
+import { useNavigate } from "react-router-dom";
 
 /* ================= SORTING ================= */
 
@@ -124,6 +125,7 @@ export default function ProductTable() {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const [loading, setLoading] = useState(true);
+        const navigate = useNavigate();
 
     /* ===== API CALL ===== */
     useEffect(() => {
@@ -226,6 +228,7 @@ export default function ProductTable() {
                                                 sx={{ mr: 1, alignItems: 'center' }}
                                                 color='primary'
                                                 startIcon={<RemoveRedEyeOutlinedIcon />}
+                                                onClick={()=> navigate(`/admin/product-view/${row._id}`)}
                                             />
                                             <Button
                                                 size='samll'
