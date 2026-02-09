@@ -25,6 +25,9 @@ export default function AddNewProduct() {
     const [loadingCategories, setLoadingCategories] = useState(false)
     const [loading, setLoading] = useState(false)
 
+    const [sizeInput, setSizeInput] = useState("")
+    const [productSizes, setProductSizes] = useState([])
+
     const navigate = useNavigate();
 
     const [images, setImages] = useState([])
@@ -40,6 +43,22 @@ export default function AddNewProduct() {
         availableStock: '',
         isActive: true
     })
+
+    // ---------------
+    const handleSizeKeyDown = (e) => {
+        if (e.key === "Enter") {
+            e.preventDefault()
+
+            const value = sizeInput.trim().toUpperCase()
+            if (!value) return
+
+            // Duplicate size block
+            if (productSizes.includes(value)) return
+
+            setProductSizes([...productSizes, value])
+            setSizeInput("") // cursor stays in same input
+        }
+    }
 
     /* ------------------ FETCH CATEGORIES ------------------ */
     useEffect(() => {
@@ -104,10 +123,7 @@ export default function AddNewProduct() {
             submitData.append("newPrice", Number(formData.newPrice))
             submitData.append("longDescription", formData.longDescription)
             submitData.append("shortDescription", formData.shortDescription)
-            submitData.append(
-                "productSizes",
-                JSON.stringify(formData.productSizes.split(',').map(s => s.trim()))
-            )
+            submitData.append("productSizes", JSON.stringify(productSizes))
             submitData.append("availableStock", Number(formData.availableStock))
             submitData.append("isActive", formData.isActive === "true" || formData.isActive === true)
 
@@ -216,13 +232,34 @@ export default function AddNewProduct() {
                         <div className='flex gap-3'>
                             <div className='form-group mb-4 w-full'>
                                 <h4 className='form-group mb-4 w-full'>Product Sizes</h4>
+                                {/* Added Sizes */}
+                                <div className='flex gap-2'>
+                                    {productSizes.map((size, index) => (
+                                        <span
+                                            key={index}
+                                            className=" w-fit flex items-center gap-1 px-3 py-1 border rounded"
+                                        >
+                                            {size}
+                                            <button
+                                                type="button"
+                                                onClick={() =>
+                                                    setProductSizes(productSizes.filter((_, i) => i !== index))
+                                                }
+                                                className="text-red-500 font-bold"
+                                            >
+                                                ×
+                                            </button>
+                                        </span>
+                                    ))}
+
+                                </div>
                                 <input
                                     type="text"
-                                    className='w-full h-[50px] border-2 border-[rgba(0,0,0,0.1)] rounded-md focus:border-[rgba(0,0,0,0.7)] focus:outline-none px-3'
-                                    placeholder='Product Sizes'
-                                    name='productSizes'
-                                    value={formData.productSizes}
-                                    onChange={handleChange}
+                                    className='w-full h-[50px] border-2 border-[rgba(0,0,0,0.1)] rounded-md focus:border-[rgba(0,0,0,0.7)] focus:outline-none px-3 mt-3'
+                                    placeholder='Type size & press Enter'
+                                    value={sizeInput}
+                                    onChange={(e) => setSizeInput(e.target.value)}
+                                    onKeyDown={handleSizeKeyDown}
                                 />
                             </div>
                             <div className='form-group mb-4 w-full'>
@@ -364,7 +401,7 @@ export default function AddNewProduct() {
                         </div>
                         <p>Product Sizes :
                             <span className='text-gray-500'>
-                                {' '}{formData.productSizes || '.....'}
+                                {' '}{productSizes.length > 0 ? productSizes.join(', ') : '.....'}
                             </span>
                         </p>
                         <p>Available Stock :

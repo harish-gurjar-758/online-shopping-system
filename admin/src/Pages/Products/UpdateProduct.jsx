@@ -27,6 +27,9 @@ export default function UpdateProduct() {
     const { id } = useParams();
     const navigate = useNavigate();
 
+    const [sizeInput, setSizeInput] = useState("")
+    const [productSizes, setProductSizes] = useState([])
+
     const [product, setProduct] = useState(null);
     const [activeImage, setActiveImage] = useState(null);
     const [productCategories, setProductCategories] = useState([]);
@@ -41,10 +44,30 @@ export default function UpdateProduct() {
         newPrice: '',
         longDescription: '',
         shortDescription: '',
-        productSizes: '',
         availableStock: '',
         isActive: true
     });
+
+
+    // ---------------
+    const handleSizeKeyDown = (e) => {
+        if (e.key === "Enter") {
+            e.preventDefault()
+
+            const value = sizeInput.trim().toUpperCase()
+
+            if (!value) return
+
+            if (productSizes.includes(value)) {
+                alert("Size already added")
+                setSizeInput("")
+                return
+            }
+
+            setProductSizes(prev => [...prev, value])
+            setSizeInput("") // ✅ cursor & empty bug fixed
+        }
+    }
 
     /* ---------------- FETCH CATEGORIES ---------------- */
     const fetchCategories = async () => {
@@ -79,13 +102,12 @@ export default function UpdateProduct() {
                     newPrice: p.newPrice || '',
                     longDescription: p.longDescription || '',
                     shortDescription: p.shortDescription || '',
-                    productSizes: Array.isArray(p.productSizes)
-                        ? p.productSizes.join(', ')
-                        : '',
                     availableStock: p.availableStock || '',
                     isActive: p.isActive ?? true
                 });
-
+                if (Array.isArray(p.productSizes)) {
+                    setProductSizes(p.productSizes.map(s => s.toUpperCase()))
+                }
                 if (p.banner?.length > 0) {
                     setActiveImage(p.banner[0]); // index 0 banner
                 }
@@ -150,12 +172,7 @@ export default function UpdateProduct() {
             submitData.append("newPrice", Number(formData.newPrice));
             submitData.append("longDescription", formData.longDescription);
             submitData.append("shortDescription", formData.shortDescription);
-            submitData.append(
-                "productSizes",
-                JSON.stringify(
-                    formData.productSizes.split(',').map(s => s.trim())
-                )
-            );
+            submitData.append("productSizes", JSON.stringify(productSizes));
             submitData.append("availableStock", Number(formData.availableStock));
             submitData.append(
                 "isActive",
@@ -260,13 +277,35 @@ export default function UpdateProduct() {
                         <div className='flex gap-3'>
                             <div className='form-group mb-4 w-full'>
                                 <h4 className='form-group mb-4 w-full'>Product Sizes</h4>
+                                <div className='flex gap-2'>
+                                    {productSizes.map((size, index) => (
+                                        <span
+                                            key={index}
+                                            className=" w-fit flex items-center gap-1 px-3 py-1 border rounded"
+                                        >
+                                            {size}
+                                            <button
+                                                type="button"
+                                                onClick={() =>
+                                                    setProductSizes(prev =>
+                                                        prev.filter((_, i) => i !== index)
+                                                    )
+                                                }
+                                                className="text-red-500 font-bold"
+                                            >
+                                                ×
+                                            </button>
+                                        </span>
+                                    ))}
+
+                                </div>
                                 <input
                                     type="text"
-                                    className='w-full h-[50px] border-2 border-[rgba(0,0,0,0.1)] rounded-md focus:border-[rgba(0,0,0,0.7)] focus:outline-none px-3'
-                                    placeholder='Product Sizes'
-                                    name='productSizes'
-                                    value={formData.productSizes}
-                                    onChange={handleChange}
+                                    className='w-full h-[50px] border-2 border-[rgba(0,0,0,0.1)] rounded-md focus:border-[rgba(0,0,0,0.7)] focus:outline-none px-3 mt-3'
+                                    placeholder='Type size & press Enter'
+                                    value={sizeInput}
+                                    onChange={(e) => setSizeInput(e.target.value)}
+                                    onKeyDown={handleSizeKeyDown}
                                 />
                             </div>
                             <div className='form-group mb-4 w-full'>
@@ -306,10 +345,7 @@ export default function UpdateProduct() {
                         <div className='flex gap-3'>
                             <div className='form-group mb-4 w-full'>
                                 <h4 className='form-group mb-4 w-full'>Product Banners</h4>
-                                {/* <input
-                                    type="file"
-                                    className='w-full h-[50px] border-2 border-[rgba(0,0,0,0.1)] rounded-md focus:border-[rgba(0,0,0,0.7)] focus:outline-none px-3'
-                                /> */}
+
                                 <Button
                                     component="label"
                                     variant="outlined"
@@ -342,7 +378,7 @@ export default function UpdateProduct() {
                             type="submit"
                             disabled={loading}
                         >
-                            {loading ? "Adding..." : "Add Product"}
+                            {loading ? "Updateing..." : "Update Product"}
                         </Button>
                     </form>
 
@@ -408,7 +444,7 @@ export default function UpdateProduct() {
                         </div>
                         <p>Product Sizes :
                             <span className='text-gray-500'>
-                                {' '}{formData.productSizes || '.....'}
+                                {' '}{productSizes.length > 0 ? productSizes.join(', ') : '.....'}
                             </span>
                         </p>
                         <p>Available Stock :
